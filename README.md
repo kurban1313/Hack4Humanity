@@ -87,6 +87,7 @@ LRU Cache
 ⚡ Installation
 1️⃣ Clone Repository
 git clone https://github.com/your-username/ingres-ai-assistant.git
+
 cd ingres-ai-assistant
 
 2️⃣ Install Dependencies
