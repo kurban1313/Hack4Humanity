@@ -86,9 +86,9 @@ LRU Cache
 
 ⚡ Installation
 1️⃣ Clone Repository
-git clone https://github.com/your-username/ingres-ai-assistant.git
+git clone https://github.com/kurban1313/Hack4Humanity.git
 
-cd ingres-ai-assistant
+cd Hack4Humanity
 
 2️⃣ Install Dependencies
 pip install -r requirements.txt
