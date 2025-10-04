@@ -1,0 +1,282 @@
+State,District,Year,Groundwater_Level_m,Category,Recharge_BCM,Extraction_BCM
+Punjab,Amritsar,2014,12.3,Semi-Critical,0.185,0.245
+Punjab,Amritsar,2015,12.8,Semi-Critical,0.178,0.252
+Punjab,Amritsar,2016,13.2,Critical,0.172,0.258
+Punjab,Amritsar,2017,13.7,Critical,0.169,0.265
+Punjab,Amritsar,2018,14.1,Critical,0.165,0.271
+Punjab,Amritsar,2019,14.4,Critical,0.162,0.276
+Punjab,Amritsar,2020,14.6,Critical,0.175,0.278
+Punjab,Amritsar,2021,14.5,Critical,0.173,0.281
+Punjab,Amritsar,2022,14.6,Critical,0.171,0.282
+Punjab,Amritsar,2023,14.7,Semi-Critical,0.171,0.284
+Punjab,Barnala,2014,30.8,Over-Exploited,0.112,0.145
+Punjab,Barnala,2015,31.5,Over-Exploited,0.108,0.148
+Punjab,Barnala,2016,32.1,Over-Exploited,0.105,0.150
+Punjab,Barnala,2017,32.8,Over-Exploited,0.102,0.152
+Punjab,Barnala,2018,33.2,Over-Exploited,0.100,0.153
+Punjab,Barnala,2019,33.6,Over-Exploited,0.098,0.154
+Punjab,Barnala,2020,33.8,Over-Exploited,0.101,0.155
+Punjab,Barnala,2021,34.0,Over-Exploited,0.098,0.156
+Punjab,Barnala,2022,34.1,Over-Exploited,0.095,0.156
+Punjab,Barnala,2023,34.2,Over-Exploited,0.093,0.156
+Punjab,Bathinda,2014,14.2,Critical,0.168,0.165
+Punjab,Bathinda,2015,14.8,Critical,0.162,0.167
+Punjab,Bathinda,2016,15.3,Critical,0.158,0.169
+Punjab,Bathinda,2017,15.9,Critical,0.155,0.171
+Punjab,Bathinda,2018,16.2,Critical,0.152,0.172
+Punjab,Bathinda,2019,16.4,Critical,0.150,0.173
+Punjab,Bathinda,2020,16.5,Critical,0.155,0.174
+Punjab,Bathinda,2021,16.6,Critical,0.154,0.174
+Punjab,Bathinda,2022,16.6,Critical,0.153,0.175
+Punjab,Bathinda,2023,16.7,Critical,0.153,0.175
+Punjab,Faridkot,2014,7.8,Semi-Critical,0.078,0.085
+Punjab,Faridkot,2015,8.1,Semi-Critical,0.075,0.087
+Punjab,Faridkot,2016,8.4,Semi-Critical,0.073,0.089
+Punjab,Faridkot,2017,8.7,Semi-Critical,0.071,0.091
+Punjab,Faridkot,2018,8.9,Semi-Critical,0.070,0.093
+Punjab,Faridkot,2019,9.0,Semi-Critical,0.068,0.094
+Punjab,Faridkot,2020,9.0,Semi-Critical,0.069,0.095
+Punjab,Faridkot,2021,9.1,Semi-Critical,0.068,0.095
+Punjab,Faridkot,2022,9.1,Semi-Critical,0.067,0.096
+Punjab,Faridkot,2023,9.1,Semi-Critical,0.067,0.096
+Punjab,Fatehgarh Sahib,2014,20.5,Over-Exploited,0.072,0.082
+Punjab,Fatehgarh Sahib,2015,21.1,Over-Exploited,0.069,0.083
+Punjab,Fatehgarh Sahib,2016,21.6,Over-Exploited,0.067,0.084
+Punjab,Fatehgarh Sahib,2017,22.1,Over-Exploited,0.065,0.085
+Punjab,Fatehgarh Sahib,2018,22.5,Over-Exploited,0.063,0.086
+Punjab,Fatehgarh Sahib,2019,22.8,Over-Exploited,0.062,0.087
+Punjab,Fatehgarh Sahib,2020,22.9,Over-Exploited,0.063,0.088
+Punjab,Fatehgarh Sahib,2021,23.0,Over-Exploited,0.062,0.088
+Punjab,Fatehgarh Sahib,2022,23.1,Over-Exploited,0.061,0.089
+Punjab,Fatehgarh Sahib,2023,23.2,Over-Exploited,0.061,0.089
+Punjab,Fazilka,2014,10.2,Semi-Critical,0.095,0.102
+Punjab,Fazilka,2015,10.6,Semi-Critical,0.092,0.105
+Punjab,Fazilka,2016,10.9,Semi-Critical,0.090,0.107
+Punjab,Fazilka,2017,11.2,Semi-Critical,0.088,0.109
+Punjab,Fazilka,2018,11.4,Semi-Critical,0.087,0.110
+Punjab,Fazilka,2019,11.6,Semi-Critical,0.086,0.111
+Punjab,Fazilka,2020,11.7,Semi-Critical,0.086,0.111
+Punjab,Fazilka,2021,11.7,Semi-Critical,0.085,0.112
+Punjab,Fazilka,2022,11.8,Semi-Critical,0.085,0.112
+Punjab,Fazilka,2023,11.8,Semi-Critical,0.085,0.112
+Punjab,Ferozepur,2014,8.5,Critical,0.265,0.275
+Punjab,Ferozepur,2015,8.9,Critical,0.258,0.278
+Punjab,Ferozepur,2016,9.2,Critical,0.252,0.280
+Punjab,Ferozepur,2017,9.6,Critical,0.248,0.282
+Punjab,Ferozepur,2018,9.8,Critical,0.245,0.284
+Punjab,Ferozepur,2019,10.0,Critical,0.242,0.285
+Punjab,Ferozepur,2020,10.1,Critical,0.243,0.286
+Punjab,Ferozepur,2021,10.1,Critical,0.241,0.286
+Punjab,Ferozepur,2022,10.2,Critical,0.240,0.287
+Punjab,Ferozepur,2023,10.2,Critical,0.240,0.287
+Punjab,Gurdaspur,2014,5.8,Safe,0.215,0.115
+Punjab,Gurdaspur,2015,6.1,Safe,0.210,0.118
+Punjab,Gurdaspur,2016,6.3,Safe,0.206,0.120
+Punjab,Gurdaspur,2017,6.6,Safe,0.203,0.121
+Punjab,Gurdaspur,2018,6.8,Safe,0.201,0.122
+Punjab,Gurdaspur,2019,6.9,Safe,0.199,0.123
+Punjab,Gurdaspur,2020,7.0,Safe,0.200,0.124
+Punjab,Gurdaspur,2021,7.0,Safe,0.198,0.124
+Punjab,Gurdaspur,2022,7.1,Safe,0.196,0.125
+Punjab,Gurdaspur,2023,7.1,Safe,0.195,0.125
+Punjab,Hoshiarpur,2014,15.2,Safe,0.158,0.089
+Punjab,Hoshiarpur,2015,15.8,Safe,0.152,0.092
+Punjab,Hoshiarpur,2016,16.2,Safe,0.148,0.094
+Punjab,Hoshiarpur,2017,16.6,Safe,0.145,0.095
+Punjab,Hoshiarpur,2018,16.9,Safe,0.143,0.096
+Punjab,Hoshiarpur,2019,17.1,Safe,0.141,0.097
+Punjab,Hoshiarpur,2020,17.2,Safe,0.142,0.097
+Punjab,Hoshiarpur,2021,17.2,Safe,0.141,0.098
+Punjab,Hoshiarpur,2022,17.3,Safe,0.140,0.098
+Punjab,Hoshiarpur,2023,17.3,Safe,0.142,0.098
+Punjab,Jalandhar,2014,22.8,Over-Exploited,0.145,0.165
+Punjab,Jalandhar,2015,23.4,Over-Exploited,0.141,0.168
+Punjab,Jalandhar,2016,23.9,Over-Exploited,0.138,0.170
+Punjab,Jalandhar,2017,24.4,Over-Exploited,0.136,0.172
+Punjab,Jalandhar,2018,24.8,Over-Exploited,0.134,0.173
+Punjab,Jalandhar,2019,25.1,Over-Exploited,0.132,0.174
+Punjab,Jalandhar,2020,25.2,Over-Exploited,0.133,0.174
+Punjab,Jalandhar,2021,25.3,Over-Exploited,0.131,0.175
+Punjab,Jalandhar,2022,25.4,Over-Exploited,0.130,0.175
+Punjab,Jalandhar,2023,25.5,Over-Exploited,0.130,0.175
+Punjab,Kapurthala,2014,16.2,Critical,0.102,0.108
+Punjab,Kapurthala,2015,16.8,Critical,0.098,0.110
+Punjab,Kapurthala,2016,17.3,Critical,0.095,0.112
+Punjab,Kapurthala,2017,17.7,Critical,0.093,0.114
+Punjab,Kapurthala,2018,18.1,Critical,0.091,0.115
+Punjab,Kapurthala,2019,18.4,Critical,0.090,0.116
+Punjab,Kapurthala,2020,18.5,Critical,0.090,0.117
+Punjab,Kapurthala,2021,18.6,Critical,0.089,0.117
+Punjab,Kapurthala,2022,18.7,Critical,0.089,0.118
+Punjab,Kapurthala,2023,18.8,Critical,0.089,0.118
+Punjab,Ludhiana,2014,18.2,Over-Exploited,0.238,0.285
+Punjab,Ludhiana,2015,18.9,Over-Exploited,0.232,0.288
+Punjab,Ludhiana,2016,19.4,Over-Exploited,0.228,0.291
+Punjab,Ludhiana,2017,19.9,Over-Exploited,0.225,0.294
+Punjab,Ludhiana,2018,20.3,Over-Exploited,0.222,0.295
+Punjab,Ludhiana,2019,20.6,Over-Exploited,0.220,0.296
+Punjab,Ludhiana,2020,20.7,Over-Exploited,0.220,0.297
+Punjab,Ludhiana,2021,20.9,Over-Exploited,0.218,0.297
+Punjab,Ludhiana,2022,21.0,Over-Exploited,0.216,0.298
+Punjab,Ludhiana,2023,21.1,Over-Exploited,0.215,0.298
+Punjab,Mansa,2014,12.8,Critical,0.125,0.135
+Punjab,Mansa,2015,13.3,Critical,0.121,0.138
+Punjab,Mansa,2016,13.7,Critical,0.118,0.140
+Punjab,Mansa,2017,14.1,Critical,0.116,0.142
+Punjab,Mansa,2018,14.4,Critical,0.115,0.143
+Punjab,Mansa,2019,14.6,Critical,0.114,0.144
+Punjab,Mansa,2020,14.7,Critical,0.115,0.144
+Punjab,Mansa,2021,14.8,Critical,0.114,0.145
+Punjab,Mansa,2022,14.8,Critical,0.114,0.145
+Punjab,Mansa,2023,14.9,Critical,0.114,0.145
+Punjab,Moga,2014,23.2,Over-Exploited,0.105,0.125
+Punjab,Moga,2015,23.9,Over-Exploited,0.101,0.128
+Punjab,Moga,2016,24.4,Over-Exploited,0.098,0.130
+Punjab,Moga,2017,24.9,Over-Exploited,0.096,0.132
+Punjab,Moga,2018,25.3,Over-Exploited,0.094,0.133
+Punjab,Moga,2019,25.6,Over-Exploited,0.093,0.134
+Punjab,Moga,2020,25.7,Over-Exploited,0.093,0.135
+Punjab,Moga,2021,25.7,Over-Exploited,0.092,0.135
+Punjab,Moga,2022,25.8,Over-Exploited,0.092,0.136
+Punjab,Moga,2023,25.8,Over-Exploited,0.092,0.136
+Punjab,Muktsar,2014,2.8,Safe,0.089,0.045
+Punjab,Muktsar,2015,3.0,Safe,0.086,0.047
+Punjab,Muktsar,2016,3.2,Safe,0.084,0.048
+Punjab,Muktsar,2017,3.4,Safe,0.083,0.049
+Punjab,Muktsar,2018,3.5,Safe,0.082,0.050
+Punjab,Muktsar,2019,3.6,Safe,0.081,0.050
+Punjab,Muktsar,2020,3.6,Safe,0.081,0.051
+Punjab,Muktsar,2021,3.7,Safe,0.081,0.051
+Punjab,Muktsar,2022,3.7,Safe,0.081,0.051
+Punjab,Muktsar,2023,3.7,Safe,0.081,0.051
+Punjab,Pathankot,2014,7.2,Safe,0.095,0.058
+Punjab,Pathankot,2015,7.6,Safe,0.092,0.060
+Punjab,Pathankot,2016,7.9,Safe,0.090,0.061
+Punjab,Pathankot,2017,8.2,Safe,0.089,0.062
+Punjab,Pathankot,2018,8.4,Safe,0.088,0.063
+Punjab,Pathankot,2019,8.6,Safe,0.087,0.064
+Punjab,Pathankot,2020,8.7,Safe,0.087,0.064
+Punjab,Pathankot,2021,8.8,Safe,0.087,0.065
+Punjab,Pathankot,2022,8.8,Safe,0.087,0.065
+Punjab,Pathankot,2023,8.9,Safe,0.087,0.065
+Punjab,Patiala,2014,27.2,Over-Exploited,0.168,0.218
+Punjab,Patiala,2015,28.1,Over-Exploited,0.163,0.222
+Punjab,Patiala,2016,28.8,Over-Exploited,0.159,0.225
+Punjab,Patiala,2017,29.4,Over-Exploited,0.157,0.228
+Punjab,Patiala,2018,29.8,Over-Exploited,0.155,0.230
+Punjab,Patiala,2019,30.1,Over-Exploited,0.153,0.231
+Punjab,Patiala,2020,30.2,Over-Exploited,0.153,0.232
+Punjab,Patiala,2021,30.2,Over-Exploited,0.152,0.232
+Punjab,Patiala,2022,30.3,Over-Exploited,0.152,0.233
+Punjab,Patiala,2023,30.3,Over-Exploited,0.152,0.233
+Punjab,Rupnagar,2014,12.2,Semi-Critical,0.086,0.088
+Punjab,Rupnagar,2015,12.7,Semi-Critical,0.083,0.090
+Punjab,Rupnagar,2016,13.1,Semi-Critical,0.081,0.092
+Punjab,Rupnagar,2017,13.4,Semi-Critical,0.080,0.093
+Punjab,Rupnagar,2018,13.7,Semi-Critical,0.079,0.094
+Punjab,Rupnagar,2019,13.8,Semi-Critical,0.078,0.094
+Punjab,Rupnagar,2020,13.9,Semi-Critical,0.078,0.095
+Punjab,Rupnagar,2021,13.9,Semi-Critical,0.078,0.095
+Punjab,Rupnagar,2022,14.0,Semi-Critical,0.078,0.095
+Punjab,Rupnagar,2023,14.0,Semi-Critical,0.078,0.095
+Punjab,Sangrur,2014,30.2,Over-Exploited,0.178,0.265
+Punjab,Sangrur,2015,31.2,Over-Exploited,0.172,0.268
+Punjab,Sangrur,2016,31.9,Over-Exploited,0.168,0.271
+Punjab,Sangrur,2017,32.5,Over-Exploited,0.165,0.274
+Punjab,Sangrur,2018,32.9,Over-Exploited,0.163,0.277
+Punjab,Sangrur,2019,33.3,Over-Exploited,0.161,0.279
+Punjab,Sangrur,2020,33.6,Over-Exploited,0.162,0.281
+Punjab,Sangrur,2021,33.7,Over-Exploited,0.161,0.282
+Punjab,Sangrur,2022,33.9,Over-Exploited,0.160,0.283
+Punjab,Sangrur,2023,34.0,Over-Exploited,0.160,0.284
+Punjab,SAS Nagar,2014,20.2,Critical,0.078,0.082
+Punjab,SAS Nagar,2015,20.8,Critical,0.075,0.084
+Punjab,SAS Nagar,2016,21.3,Critical,0.073,0.085
+Punjab,SAS Nagar,2017,21.7,Critical,0.071,0.086
+Punjab,SAS Nagar,2018,22.1,Critical,0.070,0.087
+Punjab,SAS Nagar,2019,22.4,Critical,0.069,0.088
+Punjab,SAS Nagar,2020,22.5,Critical,0.069,0.088
+Punjab,SAS Nagar,2021,22.6,Critical,0.068,0.089
+Punjab,SAS Nagar,2022,22.7,Critical,0.068,0.089
+Punjab,SAS Nagar,2023,22.8,Critical,0.068,0.089
+Punjab,SBS Nagar,2014,17.8,Semi-Critical,0.062,0.065
+Punjab,SBS Nagar,2015,18.4,Semi-Critical,0.059,0.067
+Punjab,SBS Nagar,2016,18.8,Semi-Critical,0.057,0.068
+Punjab,SBS Nagar,2017,19.2,Semi-Critical,0.056,0.069
+Punjab,SBS Nagar,2018,19.5,Semi-Critical,0.055,0.070
+Punjab,SBS Nagar,2019,19.7,Semi-Critical,0.055,0.070
+Punjab,SBS Nagar,2020,19.8,Semi-Critical,0.055,0.071
+Punjab,SBS Nagar,2021,19.8,Semi-Critical,0.055,0.071
+Punjab,SBS Nagar,2022,19.9,Semi-Critical,0.055,0.071
+Punjab,SBS Nagar,2023,19.9,Semi-Critical,0.055,0.071
+Punjab,Tarn Taran,2014,16.8,Critical,0.155,0.172
+Punjab,Tarn Taran,2015,17.3,Critical,0.150,0.175
+Punjab,Tarn Taran,2016,17.7,Critical,0.147,0.177
+Punjab,Tarn Taran,2017,18.1,Critical,0.144,0.179
+Punjab,Tarn Taran,2018,18.4,Critical,0.142,0.180
+Punjab,Tarn Taran,2019,18.6,Critical,0.141,0.181
+Punjab,Tarn Taran,2020,18.7,Critical,0.141,0.181
+Punjab,Tarn Taran,2021,18.8,Critical,0.140,0.182
+Punjab,Tarn Taran,2022,18.9,Critical,0.140,0.182
+Punjab,Tarn Taran,2023,19.0,Critical,0.140,0.182
+Punjab,Malerkotla,2014,23.8,Over-Exploited,0.052,0.058
+Punjab,Malerkotla,2015,24.5,Over-Exploited,0.050,0.060
+Punjab,Malerkotla,2016,25.0,Over-Exploited,0.048,0.061
+Punjab,Malerkotla,2017,25.5,Over-Exploited,0.047,0.062
+Punjab,Malerkotla,2018,25.9,Over-Exploited,0.046,0.063
+Punjab,Malerkotla,2019,26.2,Over-Exploited,0.045,0.064
+Punjab,Malerkotla,2020,26.3,Over-Exploited,0.045,0.065
+Punjab,Malerkotla,2021,26.3,Over-Exploited,0.045,0.066
+Punjab,Malerkotla,2022,26.4,Over-Exploited,0.045,0.066
+Punjab,Malerkotla,2023,26.4,Over-Exploited,0.045,0.067
+Haryana,Ambala,2014,18.2,Critical,0.168,0.252
+Haryana,Ambala,2015,18.7,Critical,0.165,0.255
+Haryana,Ambala,2016,19.2,Critical,0.162,0.258
+Haryana,Ambala,2017,19.6,Critical,0.160,0.261
+Haryana,Ambala,2018,20.1,Critical,0.158,0.264
+Haryana,Ambala,2019,20.5,Critical,0.156,0.267
+Haryana,Ambala,2020,20.8,Critical,0.155,0.269
+Haryana,Ambala,2021,21.2,Critical,0.154,0.271
+Haryana,Ambala,2022,21.5,Critical,0.153,0.273
+Haryana,Ambala,2023,21.8,Critical,0.152,0.275
+Haryana,Bhiwani,2014,16.8,Critical,0.285,0.415
+Haryana,Bhiwani,2015,17.4,Critical,0.280,0.420
+Haryana,Bhiwani,2016,17.9,Critical,0.276,0.424
+Haryana,Bhiwani,2017,18.4,Critical,0.273,0.428
+Haryana,Bhiwani,2018,18.8,Critical,0.270,0.432
+Haryana,Bhiwani,2019,19.2,Critical,0.268,0.435
+Haryana,Bhiwani,2020,19.5,Critical,0.266,0.438
+Haryana,Bhiwani,2021,19.8,Critical,0.264,0.441
+Haryana,Bhiwani,2022,20.1,Critical,0.262,0.444
+Haryana,Bhiwani,2023,20.4,Critical,0.261,0.447
+Haryana,Charkhi Dadri,2014,11.2,Semi-Critical,0.095,0.118
+Haryana,Charkhi Dadri,2015,11.6,Semi-Critical,0.093,0.120
+Haryana,Charkhi Dadri,2016,12.0,Semi-Critical,0.091,0.122
+Haryana,Charkhi Dadri,2017,12.4,Semi-Critical,0.089,0.124
+Haryana,Charkhi Dadri,2018,12.7,Semi-Critical,0.088,0.126
+Haryana,Charkhi Dadri,2019,13.0,Semi-Critical,0.087,0.128
+Haryana,Charkhi Dadri,2020,13.3,Semi-Critical,0.086,0.130
+Haryana,Charkhi Dadri,2021,13.5,Semi-Critical,0.085,0.131
+Haryana,Charkhi Dadri,2022,13.8,Semi-Critical,0.084,0.133
+Haryana,Charkhi Dadri,2023,14.0,Semi-Critical,0.083,0.135
+Haryana,Faridabad,2014,24.8,Over-Exploited,0.095,0.172
+Haryana,Faridabad,2015,25.3,Over-Exploited,0.093,0.175
+Haryana,Faridabad,2016,25.8,Over-Exploited,0.091,0.178
+Haryana,Faridabad,2017,26.2,Over-Exploited,0.089,0.181
+Haryana,Faridabad,2018,26.6,Over-Exploited,0.088,0.184
+Haryana,Faridabad,2019,27.0,Over-Exploited,0.087,0.186
+Haryana,Faridabad,2020,27.3,Over-Exploited,0.086,0.188
+Haryana,Faridabad,2021,27.6,Over-Exploited,0.085,0.190
+Haryana,Faridabad,2022,27.9,Over-Exploited,0.084,0.192
+Haryana,Faridabad,2023,28.2,Over-Exploited,0.083,0.194
+Haryana,Fatehabad,2014,23.5,Over-Exploited,0.168,0.297
+Haryana,Fatehabad,2015,24.1,Over-Exploited,0.165,0.301
+Haryana,Fatehabad,2016,24.6,Over-Exploited,0.162,0.305
+Haryana,Fatehabad,2017,25.1,Over-Exploited,0.160,0.309
+Haryana,Fatehabad,2018,25.5,Over-Exploited,0.158,0.312
+Haryana,Fatehabad,2019,25.9,Over-Exploited,0.156,0.315
+Haryana,Fatehabad,2020,26.2,Over-Exploited,0.155,0.318
+Haryana,Fatehabad,2021,26.5,Over-Exploited,0.154,0.321
+Haryana,Fatehabad,2022,26.8,Over-Exploited,0.153,0.323
+Haryana,Fatehabad,2023,27.1,Over-Exploited,0.152,0.326
+Haryana,Gurugram,2014,26
