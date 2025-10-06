@@ -9,19 +9,22 @@ import json
 
 st.set_page_config(page_title="INGRES AI Assistant", page_icon="💧", layout="wide")
 
-# OpenAI Client Setup (OpenRouter)
+# OpenAI Client Setup
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="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",
+    api_key="enter_your_apikey_here",    #get it from open router for free and just paste it here
 )
 
-# CSS (keeping your original styling)
+# CSS - Complete UI Fix
 st.markdown("""<style>
 .stApp{background:linear-gradient(135deg,#2d3561 0%,#3d2d4f 100%)}
 .main .block-container{padding:2rem;background:#fff;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,.25);max-width:1200px}
 [data-testid="stChatMessage"]{background:#f8f9fa;border-radius:15px;padding:1.2rem;margin:.5rem 0;box-shadow:0 2px 8px rgba(0,0,0,.1);border:1px solid #e0e0e0}
-[data-testid="stChatMessageContent"]{color:#1a1a1a;font-size:1rem;line-height:1.6}
+[data-testid="stChatMessageContent"]{color:#1a1a1a !important;font-size:1rem;line-height:1.6}
+[data-testid="stChatMessageContent"] *{color:#1a1a1a !important}
 [data-testid="stChatInput"]{border-radius:25px;border:2px solid #2d3561;background:#fff}
+[data-testid="stChatInput"] textarea{color:#1a1a1a !important;background:#fff !important;font-size:1rem !important}
+[data-testid="stChatInput"] input{color:#1a1a1a !important;background:#fff !important}
 [data-testid="stSidebar"]{background:#f5f7fa;border-right:2px solid #d0d0d0}
 .stButton button{border-radius:20px;border:none;background:#2d3561;color:#fff;font-weight:600;padding:.6rem 1.2rem;transition:all .3s ease;box-shadow:0 3px 8px rgba(45,53,97,.3)}
 .stButton button:hover{background:#1f2643;transform:translateY(-2px);box-shadow:0 5px 15px rgba(45,53,97,.5)}
@@ -29,231 +32,382 @@ st.markdown("""<style>
 [data-testid="stMetricLabel"]{color:#424242;font-weight:600}
 .stInfo{background:#e3f2fd;color:#0d47a1;border-left:4px solid #1976d2;padding:1rem}
 h1,h2,h3,h4,h5,h6{color:#1a1a1a!important;font-weight:700}
+.stMarkdown{color:#1a1a1a !important}
 </style>""", unsafe_allow_html=True)
 
 # Config
 LANGS = {'en':{'name':'English','flag':'🇬🇧'},'hi':{'name':'हिन्दी (Hindi)','flag':'🇮🇳'},'ta':{'name':'தமிழ் (Tamil)','flag':'🇮🇳'},'te':{'name':'తెలుగు (Telugu)','flag':'🇮🇳'},'kn':{'name':'ಕನ್ನಡ (Kannada)','flag':'🇮🇳'},'ml':{'name':'മലയാളം (Malayalam)','flag':'🇮🇳'},'mr':{'name':'मराठी (Marathi)','flag':'🇮🇳'},'gu':{'name':'ગુજરાતી (Gujarati)','flag':'🇮🇳'},'bn':{'name':'বাংলা (Bengali)','flag':'🇮🇳'},'pa':{'name':'ਪੰਜਾਬੀ (Punjabi)','flag':'🇮🇳'},'or':{'name':'ଓଡ଼ିଆ (Odia)','flag':'🇮🇳'},'ur':{'name':'اردو (Urdu)','flag':'🇮🇳'}}
 
 TRANS = {
-    'title':{'en':'💧 INGRES Virtual Assistant','hi':'💧 इंग्रेस वर्चुअल सहायक','ta':'💧 INGRES மெய்நிகர் உதவியாளர்','te':'💧 INGRES వర్చువల్ అసిస్టెంట్','kn':'💧 INGRES ವರ್ಚುವಲ್ ಸಹಾಯಕ','ml':'💧 INGRES വെർച്വൽ അസിസ്റ്റന്റ്','mr':'💧 इंग्रेस व्हर्च्युअल असिस्टंट','gu':'💧 INGRES વર્ચ્યુઅલ સહાયક','bn':'💧 INGRES ভার্চুয়াল সহায়ক','pa':'💧 INGRES ਵਰਚੁਅਲ ਸਹਾਇਕ','or':'💧 INGRES ଭର୍ଚୁଆଲ୍ ସହାୟକ','ur':'💧 INGRES ورچوئل اسسٹنٹ'},
-    'subtitle':{'en':'🤖 Smart AI Assistant - Ask me anything about groundwater data!','hi':'🤖 स्मार्ट एआई सहायक - भूजल डेटा के बारे में मुझसे कुछ भी पूछें!','ta':'🤖 ஸ்மார்ட் AI உதவியாளர் - நிலத்தடி நீர் தரவு பற்றி என்னிடம் எதையும் கேளுங்கள்!','te':'🤖 స్మార్ట్ AI అసిస్టెంట్ - భూగర్భ జల డేటా గురించి నన్ను ఏదైనా అడగండి!','kn':'🤖 ಸ್ಮಾರ್ಟ್ AI ಸಹಾಯಕ - ಅಂತರ್ಜಲ ಡೇಟಾ ಬಗ್ಗೆ ನನ್ನನ್ನು ಏನು ಬೇಕಾದರೂ ಕೇಳಿ!','ml':'🤖 സ്മാർട്ട് AI അസിസ്റ്റന്റ് - ഭൂഗർഭജല ഡാറ്റയെക്കുറിച്ച് എന്തും എന്നോട് ചോദിക്കൂ!','mr':'🤖 स्मार्ट AI असिस्टंट - भूजल डेटाबद्दल मला काहीही विचारा!','gu':'🤖 સ્માર્ટ AI સહાયક - ભૂગર્ભજળ ડેટા વિશે મને કંઈપણ પૂછો!','bn':'🤖 স্মার্ট AI সহায়ক - ভূগর্ভস্থ জল ডেটা সম্পর্কে আমাকে যেকোনো কিছু জিজ্ঞাসা করুন!','pa':'🤖 ਸਮਾਰਟ AI ਸਹਾਇਕ - ਭੂਮੀਗਤ ਪਾਣੀ ਡੇਟਾ ਬਾਰੇ ਮੈਨੂੰ ਕੁਝ ਵੀ ਪੁੱਛੋ!','or':'🤖 ସ୍ମାର୍ଟ AI ସହାୟକ - ଭୂତଳ ଜଳ ତଥ୍ୟ ବିଷୟରେ ମୋତେ କିଛି ପଚାରନ୍ତୁ!','ur':'🤖 سمارٹ AI اسسٹنٹ - زمینی پانی کے ڈیٹا کے بارے میں مجھ سے کچھ بھی پوچھیں!'},
-    'input':{'en':'Ask me anything...','hi':'मुझसे कुछ भी पूछें...','ta':'என்னிடம் எதையும் கேளுங்கள்...','te':'నన్ను ఏదైనా అడగండి...','kn':'ನನ್ನನ್ನು ಏನು ಬೇಕಾದರೂ ಕೇಳಿ...','ml':'എന്തും ചോദിക്കൂ...','mr':'मला काहीही विचारा...','gu':'મને કંઈપણ પૂછો...','bn':'আমাকে যেকোনো কিছু জিজ্ঞাসা করুন...','pa':'ਮੈਨੂੰ ਕੁਝ ਵੀ ਪੁੱਛੋ...','or':'ମୋତେ କିଛି ପଚାରନ୍ତୁ...','ur':'مجھ سے کچھ بھی پوچھیں...'},
-    'greeting':{'en':"Hello! 👋 I'm your INGRES AI assistant. Ask me about groundwater data!",'hi':"नमस्ते! 👋 मैं आपका INGRES AI सहायक हूँ। मुझसे भूजल डेटा के बारे में पूछें!",'ta':"வணக்கம்! 👋 நான் உங்கள் INGRES AI உதவியாளர். நிலத்தடி நீர் தரவு பற்றி என்னிடம் கேளுங்கள்!",'te':"నమస్కారం! 👋 నేను మీ INGRES AI అసిస్టెంట్. భూగర్భ జల డేటా గురించి నన్ను అడగండి!",'kn':"ನಮಸ್ಕಾರ! 👋 ನಾನು ನಿಮ್ಮ INGRES AI ಸಹಾಯಕ. ಅಂತರ್ಜಲ ಡೇಟಾ ಬಗ್ಗೆ ನನ್ನನ್ನು ಕೇಳಿ!",'ml':"നമസ്കാരം! 👋 ഞാൻ നിങ്ങളുടെ INGRES AI അസിസ്റ്റന്റ്. ഭൂഗർഭജല ഡാറ്റയെക്കുറിച്ച് എന്നോട് ചോദിക്കൂ!",'mr':"नमस्कार! 👋 मी तुमचा INGRES AI असिस्टंट आहे। भूजल डेटाबद्दल मला विचारा!",'gu':"નમસ્તે! 👋 હું તમારો INGRES AI સહાયક છું. ભૂગર્ભજળ ડેટા વિશે મને પૂછો!",'bn':"নমস্কার! 👋 আমি আপনার INGRES AI সহায়ক। ভূগর্ভস্থ জল ডেটা সম্পর্কে আমাকে জিজ্ঞাসা করুন!",'pa':"ਸਤ ਸ੍ਰੀ ਅਕਾਲ! 👋 ਮੈਂ ਤੁਹਾਡਾ INGRES AI ਸਹਾਇਕ ਹਾਂ। ਭੂਮੀਗਤ ਪਾਣੀ ਡੇਟਾ ਬਾਰੇ ਮੈਨੂੰ ਪੁੱਛੋ!",'or':"ନମସ୍କାର! 👋 ମୁଁ ଆପଣଙ୍କର INGRES AI ସହାୟକ। ଭୂତଳ ଜଳ ତଥ୍ୟ ବିଷୟରେ ମୋତେ ପଚାରନ୍ତୁ!",'ur':"السلام علیکم! 👋 میں آپ کا INGRES AI اسسٹنٹ ہوں۔ زمینی پانی کے ڈیٹا کے بارے میں مجھ سے پوچھیں!"}
+    'title':{'en':'💧 INGRES Virtual Assistant','hi':'💧 इंग्रेस वर्चुअल सहायक'},
+    'subtitle':{'en':'🤖 Smart AI Assistant - Ask me anything about groundwater data!','hi':'🤖 स्मार्ट एआई सहायक - भूजल डेटा के बारे में मुझसे कुछ भी पूछें!'},
+    'input':{'en':'Ask me anything...','hi':'मुझसे कुछ भी पूछें...'},
+    'greeting':{'en':"Hello! 👋 I'm your INGRES AI assistant. Ask me about groundwater data!",'hi':"नमस्ते! 👋 मैं आपका INGRES AI सहायक हूँ। मुझसे भूजल डेटा के बारे में पूछें!"}
 }
 
 # Init
-for k in ['language','messages','data_cards','compare_mode']: 
-    if k not in st.session_state: 
-        st.session_state[k]='en' if k=='language' else {} if k=='data_cards' else [] if k=='messages' else None
+for k in ['language','messages','data_cards','context_memory']: 
+    if k not in st.session_state:
+        if k == 'language':
+            st.session_state[k] = 'en'
+        elif k == 'data_cards':
+            st.session_state[k] = {}
+        elif k == 'messages':
+            st.session_state[k] = []
+        elif k == 'context_memory':
+            st.session_state[k] = {
+                'last_district': None,
+                'last_year': None,
+                'recent_districts': [],
+                'recent_years': []
+            }
 
 @st.cache_data
 def load_data(): 
     return pd.read_csv('sample_data.csv')
 
-df=load_data()
+df = load_data()
 
 @lru_cache(maxsize=1000)
-def tr(t,l,s='en'): 
+def tr(t, l, s='en'): 
     if not t: return t
-    return t if l=='en' or l==s else GoogleTranslator(source=s,target=l).translate(t)
+    return t if l == 'en' or l == s else GoogleTranslator(source=s, target=l).translate(t)
 
-def gt(k,l='en'): 
-    return TRANS.get(k,{}).get(l,TRANS[k]['en'])
+def gt(k, l='en'): 
+    return TRANS.get(k, {}).get(l, TRANS.get(k, {}).get('en', ''))
 
-# ============= AI-ENHANCED FUNCTIONS =============
+# ============= ENHANCED CONTEXT TRACKING =============
+
+def update_context(district=None, year=None):
+    """Update conversation context memory"""
+    memory = st.session_state.context_memory
+    
+    if district:
+        memory['last_district'] = district
+        if district not in memory['recent_districts']:
+            memory['recent_districts'].insert(0, district)
+            memory['recent_districts'] = memory['recent_districts'][:5]
+    
+    if year:
+        memory['last_year'] = year
+        if year not in memory['recent_years']:
+            memory['recent_years'].insert(0, year)
+            memory['recent_years'] = memory['recent_years'][:5]
+
+def get_context():
+    """Get current context"""
+    return st.session_state.context_memory
+
+# ============= YEAR NORMALIZATION =============
+
+def normalize_year(year_input):
+    """Normalize year: 23 -> 2023, 2023 -> 2023"""
+    if not year_input:
+        return None
+    
+    year_str = str(year_input).strip().strip("'\"")
+    
+    if len(year_str) == 4 and year_str.isdigit():
+        return year_str
+    elif len(year_str) == 2 and year_str.isdigit():
+        return str(2000 + int(year_str))
+    elif len(year_str) == 1 and year_str.isdigit():
+        return f"200{year_str}"
+    
+    return None
+
+def extract_years(text):
+    """Extract and normalize all years from text"""
+    years = []
+    
+    # 4-digit years
+    four_digit = re.findall(r'\b(20[0-9]{2})\b', text)
+    years.extend(four_digit)
+    
+    # 2-digit years
+    two_digit = re.findall(r"'(\d{2})\b|\b(\d{2})(?=\s*(?:to|vs|and|-|,|\s|$))", text)
+    for match in two_digit:
+        digit = match[0] or match[1]
+        if digit:
+            normalized = normalize_year(digit)
+            if normalized and normalized not in years:
+                years.append(normalized)
+    
+    return years
+
+def extract_districts(text):
+    """Extract district names from text using fuzzy matching"""
+    all_districts = df['District'].unique().tolist()
+    found_districts = []
+    
+    # Check exact matches first
+    for district in all_districts:
+        if district.lower() in text.lower():
+            found_districts.append(district)
+    
+    # Fuzzy matching for remaining words
+    if not found_districts:
+        words = re.findall(r'\b\w+\b', text)
+        for word in words:
+            match = process.extractOne(word, all_districts, scorer=fuzz.ratio)
+            if match and match[1] >= 70 and match[0] not in found_districts:
+                found_districts.append(match[0])
+    
+    return found_districts
+
+# ============= DATABASE FUNCTIONS =============
 
 def get_database_schema():
-    """Provides schema information to LLM for better understanding[web:23][web:26]"""
-    schema = {
-        "table": "groundwater_data",
-        "columns": df.columns.tolist(),
+    """Get database schema info"""
+    return {
         "districts": df['District'].unique().tolist(),
         "years": sorted(df['Year'].unique().tolist()),
-        "sample_data": df.head(3).to_dict('records')
+        "columns": df.columns.tolist()
     }
-    return schema
 
-def query_groundwater_data(district=None, year=None, years=None, districts=None):
+def query_data(district=None, year=None, districts=None, years=None):
     """
-    Smart database query function with validation[web:21][web:23]
-    Returns: (success, data/error_message)
+    FIXED: Query database with proper parameter handling
     """
     try:
+        # Normalize years
+        if year:
+            year = normalize_year(year)
+        if years:
+            years = [normalize_year(y) for y in years if normalize_year(y)]
+        
+        # Update context
+        if district:
+            update_context(district=district, year=year)
+        if districts:
+            for d in districts:
+                update_context(district=d)
+        
         # Single district, single year
-        if district and year:
-            result = df[(df['District'].str.lower()==district.lower()) & 
-                       (df['Year'].astype(str)==str(year))]
+        if district and year and not districts and not years:
+            result = df[(df['District'].str.lower() == district.lower()) & 
+                       (df['Year'].astype(str) == str(year))]
             if not result.empty:
                 return True, result.iloc[0].to_dict()
-            return False, f"No data found for {district} in {year}"
+            return False, f"No data for {district} in {year}"
         
-        # Single district, multiple years (comparison)
-        if district and years:
+        # Single district, multiple years (time series)
+        if district and years and not districts:
             results = []
             for y in years:
-                r = df[(df['District'].str.lower()==district.lower()) & 
-                      (df['Year'].astype(str)==str(y))]
+                r = df[(df['District'].str.lower() == district.lower()) & 
+                      (df['Year'].astype(str) == str(y))]
                 if not r.empty:
                     results.append(r.iloc[0].to_dict())
-            return True, results if results else (False, f"No data found")
+            if results:
+                return True, {'type': 'time_series', 'data': results}
+            return False, f"No data for {district}"
         
-        # Multiple districts, single year (comparison)
-        if districts and year:
+        # Multiple districts, single year (spatial comparison) - FIXED!
+        if districts and year and not years:
             results = []
             for d in districts:
-                r = df[(df['District'].str.lower()==d.lower()) & 
-                      (df['Year'].astype(str)==str(year))]
+                r = df[(df['District'].str.lower() == d.lower()) & 
+                      (df['Year'].astype(str) == str(year))]
                 if not r.empty:
                     results.append(r.iloc[0].to_dict())
-            return True, results if results else (False, f"No data found")
+            if results:
+                return True, {'type': 'district_comparison', 'data': results, 'year': year}
+            return False, f"No data for year {year}"
         
-        return False, "Invalid query parameters"
+        # Multiple districts, multiple years
+        if districts and years:
+            results = []
+            for d in districts:
+                for y in years:
+                    r = df[(df['District'].str.lower() == d.lower()) & 
+                          (df['Year'].astype(str) == str(y))]
+                    if not r.empty:
+                        results.append(r.iloc[0].to_dict())
+            if results:
+                return True, {'type': 'matrix', 'data': results}
+            return False, "No data found"
+        
+        # Only district - ask for year
+        if district and not year and not years:
+            available_years = df[df['District'].str.lower() == district.lower()]['Year'].unique().tolist()
+            if available_years:
+                return False, {
+                    'type': 'need_year',
+                    'district': district,
+                    'available_years': sorted([str(y) for y in available_years])
+                }
+            return False, f"District '{district}' not found"
+        
+        # Only year - ask for district
+        if year and not district and not districts:
+            available = df[df['Year'].astype(str) == str(year)]['District'].unique().tolist()
+            if available:
+                return False, {
+                    'type': 'need_district',
+                    'year': year,
+                    'available_districts': available[:10]
+                }
+            return False, f"No data for {year}"
+        
+        return False, "Invalid query"
     except Exception as e:
-        return False, f"Query error: {str(e)}"
+        return False, f"Error: {str(e)}"
 
-def get_ai_response(user_query, context_history, language='en'):
+# ============= AI RESPONSE =============
+
+def get_ai_response(user_query, language='en'):
     """
-    Enhanced AI response using OpenAI with RAG principles[web:21][web:2][web:27]
-    Integrates structured data for fact-checking and accuracy
+    ENHANCED: Smarter AI with better district/year extraction
     """
     schema = get_database_schema()
+    context = get_context()
     
-    # Build context-aware system prompt with structured data
-    system_prompt = f"""You are INGRES AI Assistant, an expert on Indian groundwater data.
+    # Extract entities from query
+    extracted_districts = extract_districts(user_query)
+    extracted_years = extract_years(user_query)
+    
+    system_prompt = f"""You are INGRES AI Assistant - expert on Indian groundwater data.
 
-**DATABASE SCHEMA**:
-- Available Districts: {', '.join(schema['districts'][:10])}... (total {len(schema['districts'])})
-- Available Years: {', '.join(map(str, schema['years']))}
-- Data Fields: {', '.join(schema['columns'])}
+**DATABASE**:
+- Districts: {', '.join(schema['districts'][:20])}... (total {len(schema['districts'])})
+- Years: {', '.join(map(str, schema['years']))}
 
-**YOUR CAPABILITIES**:
-1. Query groundwater data for specific districts and years
-2. Compare data across years or districts
-3. Provide insights on water levels, recharge, extraction, and categories
-4. Maintain conversation context
+**CONTEXT MEMORY**:
+- Last District: {context['last_district'] or 'None'}
+- Last Year: {context['last_year'] or 'None'}
+- Recent: {', '.join(context['recent_districts'][:3]) if context['recent_districts'] else 'None'}
 
-**INSTRUCTIONS**:
-- Extract district names and years from user queries
-- For comparisons, identify if user wants year-wise or district-wise comparison
-- Always validate information against the database
-- If data not available, suggest alternatives
-- Be conversational and helpful
-- Keep responses concise but informative
+**EXTRACTED FROM CURRENT QUERY**:
+- Districts detected: {', '.join(extracted_districts) if extracted_districts else 'None'}
+- Years detected: {', '.join(extracted_years) if extracted_years else 'None'}
 
-**CONTEXT**: User language is {LANGS[language]['name']}
-Previous conversation: {context_history[-3:] if context_history else 'None'}
+**CRITICAL RULES**:
+1. **District Comparison**: When user says "compare X and Y" or "X vs Y" → Use districts=[X, Y], year=last_year or most recent
+2. **Time Comparison**: When user says "compare X in 2020 and 2023" → Use district=X, years=[2020, 2023]
+3. **Context Usage**: 
+   - "what about 2022?" → Use last_district
+   - "compare with Pune" → Use last_year
+   - "show that for 2023" → Use last_district
+4. **Year Format**: Accept both 23 (→2023) and 2023
+5. **Always specify** what you're comparing in your response
 
-**IMPORTANT**: 
-- Only provide information that can be verified in the database
-- If unsure about district names, ask for clarification
-- For greetings, respond warmly and guide user on what you can do[web:2][web:27]"""
+**FUNCTION CALLING**:
+- For comparing 2+ districts in same year: districts=[...], year="2023"
+- For comparing same district across years: district="X", years=["2020", "2023"]
+- For single query: district="X", year="2023"
+
+**RESPONSE FORMAT**:
+Always explain what data you're showing:
+- "Here's data for **Jalandhar** in **2023**"
+- "Comparing **Pune** and **Mumbai** for **2022**"
+- "Showing **Delhi** across **2020, 2021, 2022**"
+
+User language: {LANGS[language]['name']}"""
 
     try:
-        # Define available functions for AI to call
-        functions = [
-            {
-                "type": "function",
-                "function": {
-                    "name": "query_groundwater_data",
-                    "description": "Query groundwater database for specific district and year, or compare multiple years/districts[web:26][web:34]",
-                    "parameters": {
-                        "type": "object",
-                        "properties": {
-                            "district": {
-                                "type": "string",
-                                "description": "District name (e.g., 'Jalandhar', 'Pune')"
-                            },
-                            "year": {
-                                "type": "string",
-                                "description": "Year (e.g., '2023', '2020')"
-                            },
-                            "years": {
-                                "type": "array",
-                                "items": {"type": "string"},
-                                "description": "List of years for comparison"
-                            },
-                            "districts": {
-                                "type": "array",
-                                "items": {"type": "string"},
-                                "description": "List of districts for comparison"
-                            }
-                        }
+        functions = [{
+            "type": "function",
+            "function": {
+                "name": "query_data",
+                "description": "Query groundwater database. For comparing districts use 'districts' array. For comparing years use 'years' array.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "district": {"type": "string", "description": "Single district name"},
+                        "year": {"type": "string", "description": "Single year (4-digit)"},
+                        "districts": {"type": "array", "items": {"type": "string"}, "description": "Multiple districts for comparison"},
+                        "years": {"type": "array", "items": {"type": "string"}, "description": "Multiple years for time series"}
                     }
                 }
             }
-        ]
+        }]
         
-        # Call OpenAI API
         response = client.chat.completions.create(
-            model="x-ai/grok-4-fast",  # Using Grok for better reasoning
+            model="deepseek/deepseek-chat-v3.1:free",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_query}
             ],
             tools=functions,
-            temperature=0.3,  # Low temperature for factual accuracy[web:2]
-            max_tokens=800
+            temperature=0.3,
+            max_tokens=1200
         )
         
         message = response.choices[0].message
         
-        # Check if AI wants to call a function
         if message.tool_calls:
             tool_call = message.tool_calls[0]
-            function_name = tool_call.function.name
             function_args = json.loads(tool_call.function.arguments)
             
-            # Execute the function call
-            if function_name == "query_groundwater_data":
-                success, data = query_groundwater_data(**function_args)
-                return {
-                    'type': 'data_query',
-                    'success': success,
-                    'data': data,
-                    'query_params': function_args,
-                    'ai_message': message.content if message.content else ""
-                }
+            success, data = query_data(**function_args)
+            
+            # Handle need_year/need_district
+            if not success and isinstance(data, dict):
+                if data.get('type') == 'need_year':
+                    return {
+                        'type': 'conversation',
+                        'message': f"I found **{data['district']}**! 📍\n\nWhich year? Available: {', '.join(data['available_years'])}",
+                        'success': True
+                    }
+                elif data.get('type') == 'need_district':
+                    return {
+                        'type': 'conversation',
+                        'message': f"I have data for **{data['year']}**! 📅\n\nWhich district?\n\n{', '.join(data['available_districts'][:8])}...",
+                        'success': True
+                    }
+            
+            return {
+                'type': 'data_query',
+                'success': success,
+                'data': data,
+                'params': function_args,
+                'ai_message': message.content
+            }
         
-        # Regular conversational response
+        if message.content:
+            return {
+                'type': 'conversation',
+                'message': message.content,
+                'success': True
+            }
+        
         return {
             'type': 'conversation',
-            'message': message.content,
+            'message': "I'm here to help! Ask about groundwater data for any district and year.",
             'success': True
         }
         
     except Exception as e:
         return {
             'type': 'error',
-            'message': f"AI processing error: {str(e)}",
+            'message': f"Error: {str(e)}",
             'success': False
         }
 
-# ============= EXISTING HELPER FUNCTIONS (Enhanced) =============
+# ============= DISPLAY FUNCTIONS =============
 
-def ex_dist(t,th=65):
-    d=df['District'].unique().tolist();w=re.findall(r'\b\w+\b',t.lower());bm,bs=None,0
-    for i in range(len(w)):
-        m=process.extractOne(w[i],d,scorer=fuzz.ratio)
-        if m and m[1]>bs and m[1]>=th: bm,bs=m[0],m[1]
-        if i<len(w)-1:
-            m=process.extractOne(w[i]+" "+w[i+1],d,scorer=fuzz.ratio)
-            if m and m[1]>bs and m[1]>=th: bm,bs=m[0],m[1]
-    return bm,bs
-
-def ex_year(t):
-    for p in [r'\b(20[1-3][0-9])\b',r"'(\d{2})\b",r'\b(\d{2})\b']:
-        m=re.search(p,t)
-        if m:
-            y=m.group(1)
-            return f"20{y}" if len(y)==2 and 15<=int(y)<=30 else y if len(y)==4 else None
-    return None
-
-def render_comparison_cards(data_list,compare_type,l):
-    """Render comparison with beautiful card UI"""
-    if not data_list: return
+def render_single_card(data, l):
+    """Render single district data card"""
+    st.markdown(f"### ✅ Data for **{data['District']}** ({data['Year']})")
+    st.info(f"🤖 AI-Validated from database")
     
-    header_text = "Year-wise Comparison" if compare_type=='years' else "District-wise Comparison"
-    st.markdown(f"### 📊 {tr(header_text, l)}")
+    c1, c2 = st.columns(2)
+    with c1:
+        st.metric("🌊 Groundwater Level", f"{data['Groundwater_Level_m']} m")
+        st.metric("💧 Annual Recharge", f"{data['Recharge_BCM']} BCM")
+    with c2:
+        st.metric("📊 Category", data['Category'])
+        st.metric("📉 Total Extraction", f"{data['Extraction_BCM']} BCM")
+    
+    if data['Groundwater_Level_m'] < 5:
+        st.warning("⚠️ Critical: Very low groundwater level")
+    elif data['Groundwater_Level_m'] > 20:
+        st.success("✅ Healthy groundwater level")
+
+def render_district_comparison(data_list, year, l):
+    """FIXED: Render district comparison with proper labels"""
+    st.markdown(f"### 📊 District Comparison for **{year}**")
     
     num_items = len(data_list)
     cols_per_row = 2 if num_items > 1 else 1
@@ -264,8 +418,7 @@ def render_comparison_cards(data_list,compare_type,l):
             if i + j < num_items:
                 dd = data_list[i + j]
                 with cols[j]:
-                    label = f"{dd['Year']}" if compare_type == 'years' else f"{dd['District']}"
-                    st.markdown(f"#### 📍 {label}")
+                    st.markdown(f"#### 📍 **{dd['District']}**")
                     
                     c1, c2 = st.columns(2)
                     with c1:
@@ -277,178 +430,217 @@ def render_comparison_cards(data_list,compare_type,l):
                     
                     st.markdown("---")
     
-    # Comparison insights with AI-generated analysis
-    st.markdown(f"#### 🔍 {tr('AI-Powered Insights', l)}")
+    # Comparison insights
+    st.markdown("#### 🔍 Comparison Insights")
+    df_compare = pd.DataFrame(data_list)
+    best = df_compare.loc[df_compare['Groundwater_Level_m'].idxmax()]
+    worst = df_compare.loc[df_compare['Groundwater_Level_m'].idxmin()]
     
-    if compare_type == 'years' and len(data_list) > 1:
+    st.markdown(f"""
+        <div style='background:#f8f9fa;padding:1rem;border-radius:10px;border-left:4px solid #2d3561'>
+            <strong>🏆 Highest Level:</strong> {best['District']} ({best['Groundwater_Level_m']}m)<br>
+            <strong>⚠️ Lowest Level:</strong> {worst['District']} ({worst['Groundwater_Level_m']}m)<br>
+            <strong>📊 Average:</strong> {df_compare['Groundwater_Level_m'].mean():.2f}m
+        </div>
+    """, unsafe_allow_html=True)
+
+def render_time_series(data_list, l):
+    """Render time series comparison"""
+    district = data_list[0]['District']
+    st.markdown(f"### 📈 Time Series for **{district}**")
+    
+    num_items = len(data_list)
+    cols_per_row = min(3, num_items)
+    
+    for i in range(0, num_items, cols_per_row):
+        cols = st.columns(cols_per_row)
+        for j in range(cols_per_row):
+            if i + j < num_items:
+                dd = data_list[i + j]
+                with cols[j]:
+                    st.markdown(f"#### 📅 **{dd['Year']}**")
+                    st.metric("🌊 GW Level", f"{dd['Groundwater_Level_m']} m")
+                    st.metric("📊 Category", dd['Category'])
+                    st.markdown("---")
+    
+    # Trend analysis
+    if len(data_list) > 1:
+        st.markdown("#### 🔍 Trend Analysis")
         first, last = data_list[0], data_list[-1]
-        gw_change = last['Groundwater_Level_m'] - first['Groundwater_Level_m']
+        change = last['Groundwater_Level_m'] - first['Groundwater_Level_m']
         
-        if gw_change < 0:
-            trend_icon = "📉"
-            trend_text = tr("Declining", l)
-            trend_color = "#dc3545"
-            insight = tr(f"⚠️ Groundwater declining by {abs(gw_change):.2f}m - Conservation needed!", l)
-        elif gw_change > 0:
-            trend_icon = "📈"
-            trend_text = tr("Improving", l)
-            trend_color = "#28a745"
-            insight = tr(f"✅ Positive trend! Level increased by {gw_change:.2f}m", l)
+        if change < 0:
+            color, icon, text = "#dc3545", "📉", "Declining"
+        elif change > 0:
+            color, icon, text = "#28a745", "📈", "Improving"
         else:
-            trend_icon = "➡️"
-            trend_text = tr("Stable", l)
-            trend_color = "#ffc107"
-            insight = tr("Groundwater level remains stable", l)
+            color, icon, text = "#ffc107", "➡️", "Stable"
         
         st.markdown(f"""
-            <div style='background:#f8f9fa;padding:1rem;border-radius:10px;border-left:4px solid {trend_color}'>
-                <strong>{trend_icon} {tr('Trend', l)}:</strong> {trend_text}<br>
-                <strong>{insight}</strong>
+            <div style='background:#f8f9fa;padding:1rem;border-radius:10px;border-left:4px solid {color}'>
+                <strong>{icon} Trend:</strong> {text}<br>
+                <strong>Change:</strong> {change:+.2f}m (from {first['Year']} to {last['Year']})
             </div>
         """, unsafe_allow_html=True)
 
-def rnd_card(dd,d,c,l):
-    """Render single data card with AI verification badge[web:6][web:7]"""
-    if c<90: st.caption(tr(f"💡 AI Matched: **{d}** ({c}% confidence)",l))
-    
-    st.markdown(f"### ✅ {tr('Verified Data', l)}: {dd['District']} ({dd['Year']})")
-    st.info(f"🤖 {tr('AI-Validated against database', l)}")
-    
-    c1,c2=st.columns(2)
-    with c1: 
-        st.metric("🌊 Groundwater Level",f"{dd['Groundwater_Level_m']} m")
-        st.metric("💧 Annual Recharge",f"{dd['Recharge_BCM']} BCM")
-    with c2: 
-        st.metric("📊 Category",dd['Category'])
-        st.metric("📉 Total Extraction",f"{dd['Extraction_BCM']} BCM")
-    
-    # Add context-aware insights
-    if dd['Groundwater_Level_m'] < 5:
-        st.warning(tr("⚠️ Critical: Very low groundwater level detected", l))
-    elif dd['Groundwater_Level_m'] > 20:
-        st.success(tr("✅ Healthy groundwater level", l))
+# ============= UI =============
 
-# Sidebar
 with st.sidebar:
-    st.markdown("""<div style='background:linear-gradient(135deg,#1a2332 0%,#2d1f33 100%);padding:1.2rem;border-radius:12px;margin-bottom:1rem;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.15)'><h3 style='color:#fff;margin:0;font-weight:700'>🌍 Language</h3></div>""",unsafe_allow_html=True)
-    sl=st.selectbox("Language",list(LANGS.keys()),format_func=lambda x:f"{LANGS[x]['flag']} {LANGS[x]['name']}",index=list(LANGS.keys()).index(st.session_state.language),label_visibility="collapsed")
-    if sl!=st.session_state.language: st.session_state.language=sl;st.rerun()
+    st.markdown("""<div style='background:linear-gradient(135deg,#1a2332 0%,#2d1f33 100%);padding:1.2rem;border-radius:12px;margin-bottom:1rem;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.15)'><h3 style='color:#fff;margin:0;font-weight:700'>🌍 Language</h3></div>""", unsafe_allow_html=True)
+    sl = st.selectbox("Language", list(LANGS.keys()), format_func=lambda x: f"{LANGS[x]['flag']} {LANGS[x]['name']}", index=list(LANGS.keys()).index(st.session_state.language), label_visibility="collapsed")
+    if sl != st.session_state.language:
+        st.session_state.language = sl
+        st.rerun()
     st.divider()
     
-    # AI Status Indicator
     st.markdown("### 🤖 AI Status")
-    st.success("✅ Grok-2 Connected")
-    st.caption("🔒 Fact-checking enabled")
+    st.success("✅ DeepSeek Connected")
+    st.caption("✨ Smart district comparison")
     st.caption("🧠 Context-aware responses")
+    st.caption("📅 Year normalization (23=2023)")
     
     if st.session_state.messages:
         st.divider()
         st.markdown("### 📊 Session Stats")
-        c1,c2=st.columns(2)
-        with c1: st.metric("💬 Messages",len(st.session_state.messages))
-        with c2: st.metric("❓ Queries",len([m for m in st.session_state.messages if m['role']=='user']))
+        c1, c2 = st.columns(2)
+        with c1:
+            st.metric("💬 Messages", len(st.session_state.messages))
+        with c2:
+            st.metric("❓ Queries", len([m for m in st.session_state.messages if m['role'] == 'user']))
+        
+        st.divider()
+        st.markdown("### 🧠 Context Memory")
+        memory = st.session_state.context_memory
+        if memory['last_district']:
+            st.info(f"📍 Last: **{memory['last_district']}**")
+        if memory['last_year']:
+            st.info(f"📅 Year: **{memory['last_year']}**")
 
-# Header
-c1,c2,c3=st.columns([1,3,1])
-with c2: 
-    st.markdown(f"<div style='text-align:center;padding:1.5rem 0'><h1 style='font-size:2.8rem;margin-bottom:.8rem;color:#1a2332;font-weight:800'>💧 INGRES AI</h1><p style='font-size:1.15rem;color:#424242;margin-bottom:0;font-weight:500'>{gt('subtitle',st.session_state.language)}</p><p style='font-size:0.9rem;color:#666;margin-top:0.5rem'>🤖 Powered by Grok-2 | 🔍 Real-time Fact Checking</p></div>",unsafe_allow_html=True)
+c1, c2, c3 = st.columns([1, 3, 1])
+with c2:
+    st.markdown(f"<div style='text-align:center;padding:1.5rem 0'><h1 style='font-size:2.8rem;margin-bottom:.8rem;color:#1a2332;font-weight:800'>💧 INGRES AI</h1><p style='font-size:1.15rem;color:#424242;margin-bottom:0;font-weight:500'>{gt('subtitle', st.session_state.language)}</p><p style='font-size:0.9rem;color:#666;margin-top:0.5rem'>🤖 Powered by DeepSeek | 🧠 Context-Aware</p></div>", unsafe_allow_html=True)
 
-# Quick Actions
 st.markdown("### 🎯 Quick Actions")
-c1,c2,c3,c4,c5=st.columns(5)
-if c1.button("📊 View Data",key="qd",use_container_width=True): 
-    st.session_state.messages.append({"role":"user","content":"Show me groundwater data for Jalandhar 2023"});st.rerun()
-if c2.button("📈 Compare",key="qc",use_container_width=True): 
-    st.session_state.messages.append({"role":"user","content":"Compare Jalandhar 2020 and 2023"});st.rerun()
-if c3.button("🔍 Analyze",key="qa",use_container_width=True): 
-    st.session_state.messages.append({"role":"user","content":"Analyze groundwater trends in Punjab"});st.rerun()
-if c4.button("❓ Help",key="qh",use_container_width=True): 
-    st.session_state.messages.append({"role":"user","content":"What can you help me with?"});st.rerun()
-if c5.button("🗑️ Clear",key="qcl",use_container_width=True): 
-    st.session_state.messages=[];st.session_state.data_cards={};st.rerun()
+c1, c2, c3, c4, c5 = st.columns(5)
+if c1.button("📊 View Data", key="qd", use_container_width=True):
+    st.session_state.messages.append({"role": "user", "content": "Show me Jalandhar 23"})
+    st.rerun()
+if c2.button("📈 Time Series", key="qc", use_container_width=True):
+    st.session_state.messages.append({"role": "user", "content": "Compare Jalandhar 20, 21, 22, 23"})
+    st.rerun()
+if c3.button("🗺️ Compare Districts", key="qa", use_container_width=True):
+    st.session_state.messages.append({"role": "user", "content": "Compare Pune and Mumbai for 22"})
+    st.rerun()
+if c4.button("❓ Help", key="qh", use_container_width=True):
+    st.session_state.messages.append({"role": "user", "content": "What can you do?"})
+    st.rerun()
+if c5.button("🗑️ Clear", key="qcl", use_container_width=True):
+    st.session_state.messages = []
+    st.session_state.data_cards = {}
+    st.session_state.context_memory = {
+        'last_district': None,
+        'last_year': None,
+        'recent_districts': [],
+        'recent_years': []
+    }
+    st.rerun()
 st.divider()
 
-# Chat Interface
 if not st.session_state.messages:
-    welcome_msg = tr("Welcome to INGRES AI!",st.session_state.language)
-    ask_msg = tr("AI-powered assistant with real-time fact-checking for Indian groundwater data",st.session_state.language)
-    try_msg = tr("Try asking:",st.session_state.language)
-    q1 = tr("What's the groundwater situation in Jalandhar?",st.session_state.language)
-    q2 = tr("Compare Pune and Mumbai groundwater levels for 2022",st.session_state.language)
-    q3 = tr("Show me the trend for Delhi from 2018 to 2023",st.session_state.language)
-    st.markdown(f"""<div style='text-align:center;padding:3rem 2rem;background:linear-gradient(135deg,#e8eef5 0%,#d4dce8 100%);border-radius:20px;margin:2rem 0;box-shadow:0 8px 25px rgba(0,0,0,.12);border:2px solid #c5d1e0'><h2 style='color:#1a2332;margin-bottom:1rem;font-weight:700'>👋 {welcome_msg}</h2><p style='font-size:1.15rem;color:#2c3e50;margin-bottom:2rem;font-weight:500'>{ask_msg}</p><div style='background:#fff;padding:1.8rem;border-radius:15px;margin-top:2rem;box-shadow:0 4px 15px rgba(0,0,0,.1);border:1px solid #d0d0d0'><p style='color:#424242;margin-bottom:1rem;font-weight:600;font-size:1.05rem'>{try_msg}</p><p style='font-style:italic;color:#1a2332;margin:.8rem 0;font-weight:500'>💬 "{q1}"</p><p style='font-style:italic;color:#1a2332;margin:.8rem 0;font-weight:500'>💬 "{q2}"</p><p style='font-style:italic;color:#1a2332;margin:.8rem 0;font-weight:500'>💬 "{q3}"</p></div></div>""",unsafe_allow_html=True)
+    st.markdown(f"""<div style='text-align:center;padding:3rem 2rem;background:linear-gradient(135deg,#e8eef5 0%,#d4dce8 100%);border-radius:20px;margin:2rem 0;box-shadow:0 8px 25px rgba(0,0,0,.12);border:2px solid #c5d1e0'>
+    <h2 style='color:#1a2332;margin-bottom:1rem;font-weight:700'>👋 Welcome to INGRES AI!</h2>
+    <p style='font-size:1.15rem;color:#2c3e50;margin-bottom:2rem;font-weight:500'>Smart district comparison & context-aware assistant</p>
+    <div style='background:#fff;padding:1.8rem;border-radius:15px;margin-top:2rem;box-shadow:0 4px 15px rgba(0,0,0,.1);border:1px solid #d0d0d0'>
+    <p style='color:#424242;margin-bottom:1rem;font-weight:600;font-size:1.05rem'>Try these queries:</p>
+    <p style='font-style:italic;color:#1a2332;margin:.8rem 0;font-weight:500'>💬 "Show me Jalandhar 23"</p>
+    <p style='font-style:italic;color:#1a2332;margin:.8rem 0;font-weight:500'>💬 "Compare Pune and Mumbai for 22"</p>
+    <p style='font-style:italic;color:#1a2332;margin:.8rem 0;font-weight:500'>💬 "Compare Jalandhar 20, 21, 22"</p>
+    </div></div>""", unsafe_allow_html=True)
 else:
-    for i,m in enumerate(st.session_state.messages):
-        with st.chat_message(m["role"],avatar="👤" if m["role"]=="user" else "🤖"):
+    for i, m in enumerate(st.session_state.messages):
+        with st.chat_message(m["role"], avatar="👤" if m["role"] == "user" else "🤖"):
             st.markdown(m["content"])
             if i in st.session_state.data_cards:
-                cd=st.session_state.data_cards[i]
-                if 'comparison' in cd:
-                    render_comparison_cards(cd['comparison'],cd['compare_type'],st.session_state.language)
+                card = st.session_state.data_cards[i]
+                if 'comparison_type' in card:
+                    if card['comparison_type'] == 'districts':
+                        render_district_comparison(card['data'], card['year'], st.session_state.language)
+                    elif card['comparison_type'] == 'time_series':
+                        render_time_series(card['data'], st.session_state.language)
                 else:
-                    rnd_card(cd['data'],cd['district'],cd['confidence'],st.session_state.language)
+                    render_single_card(card['data'], st.session_state.language)
 
-# Input Processing with AI
-if p:=st.chat_input(gt('input',st.session_state.language)):
-    # Translate to English if needed
-    pe=tr(p,'en',st.session_state.language) if st.session_state.language!='en' else p
+if p := st.chat_input(gt('input', st.session_state.language)):
+    pe = tr(p, 'en', st.session_state.language) if st.session_state.language != 'en' else p
     
-    st.chat_message("user",avatar="👤").markdown(p)
-    st.session_state.messages.append({"role":"user","content":p})
+    st.chat_message("user", avatar="👤").markdown(p)
+    st.session_state.messages.append({"role": "user", "content": p})
     
-    with st.chat_message("assistant",avatar="🤖"):
-        with st.spinner(tr("🤖 AI Processing with fact-checking...",st.session_state.language)):
-            # Get AI response with context
-            context = [{"role": m["role"], "content": m["content"]} 
-                      for m in st.session_state.messages[-5:]]
-            
-            ai_result = get_ai_response(pe, context, st.session_state.language)
+    with st.chat_message("assistant", avatar="🤖"):
+        with st.spinner("🤖 Processing..."):
+            ai_result = get_ai_response(pe, st.session_state.language)
             
             if ai_result['type'] == 'data_query' and ai_result['success']:
                 data = ai_result['data']
+                params = ai_result['params']
                 
-                # Handle comparison queries
-                if isinstance(data, list):
-                    params = ai_result['query_params']
-                    compare_type = 'years' if 'years' in params else 'districts'
-                    render_comparison_cards(data, compare_type, st.session_state.language)
+                # Handle different response types
+                if isinstance(data, dict):
+                    if data.get('type') == 'district_comparison':
+                        # District comparison
+                        render_district_comparison(data['data'], data['year'], st.session_state.language)
+                        response = f"✅ Comparing **{len(data['data'])} districts** for **{data['year']}**"
+                        st.markdown(response)
+                        
+                        st.session_state.messages.append({"role": "assistant", "content": response})
+                        st.session_state.data_cards[len(st.session_state.messages) - 1] = {
+                            'comparison_type': 'districts',
+                            'data': data['data'],
+                            'year': data['year']
+                        }
                     
-                    count = len(data)
-                    entity = params.get('district', 'multiple districts')
-                    response = tr(f"✅ AI-verified comparison of {count} data points for {entity}", st.session_state.language)
-                    st.markdown(response)
+                    elif data.get('type') == 'time_series':
+                        # Time series
+                        render_time_series(data['data'], st.session_state.language)
+                        district = data['data'][0]['District']
+                        response = f"✅ Time series for **{district}** ({len(data['data'])} years)"
+                        st.markdown(response)
+                        
+                        st.session_state.messages.append({"role": "assistant", "content": response})
+                        st.session_state.data_cards[len(st.session_state.messages) - 1] = {
+                            'comparison_type': 'time_series',
+                            'data': data['data']
+                        }
                     
-                    st.session_state.messages.append({"role":"assistant","content":response})
-                    st.session_state.data_cards[len(st.session_state.messages)-1] = {
-                        'comparison': data,
-                        'compare_type': compare_type
-                    }
+                    else:
+                        # Single result
+                        render_single_card(data, st.session_state.language)
+                        response = f"✅ Data for **{data['District']}** ({data['Year']})"
+                        st.markdown(response)
+                        
+                        st.session_state.messages.append({"role": "assistant", "content": response})
+                        st.session_state.data_cards[len(st.session_state.messages) - 1] = {
+                            'data': data
+                        }
                 
-                # Handle single query
                 else:
-                    district = ai_result['query_params'].get('district', data.get('District'))
-                    confidence = 95  # AI-verified
-                    rnd_card(data, district, confidence, st.session_state.language)
-                    
-                    response = tr(f"✅ AI-verified data for {data['District']} ({data['Year']})", st.session_state.language)
+                    # Single dict result
+                    render_single_card(data, st.session_state.language)
+                    response = f"✅ Data for **{data['District']}** ({data['Year']})"
                     st.markdown(response)
                     
-                    st.session_state.messages.append({"role":"assistant","content":response})
-                    st.session_state.data_cards[len(st.session_state.messages)-1] = {
-                        'data': data,
-                        'district': district,
-                        'confidence': confidence
+                    st.session_state.messages.append({"role": "assistant", "content": response})
+                    st.session_state.data_cards[len(st.session_state.messages) - 1] = {
+                        'data': data
                     }
             
             elif ai_result['type'] == 'conversation':
-                # Regular conversation response
                 response = ai_result['message']
-                translated_response = tr(response, st.session_state.language) if st.session_state.language != 'en' else response
-                st.markdown(translated_response)
-                st.session_state.messages.append({"role":"assistant","content":translated_response})
+                translated = tr(response, st.session_state.language) if st.session_state.language != 'en' else response
+                st.markdown(translated)
+                st.session_state.messages.append({"role": "assistant", "content": translated})
             
             else:
-                # Error handling
-                error_msg = tr(ai_result.get('message', 'Unable to process query'), st.session_state.language)
+                error_msg = tr(ai_result.get('message', 'Error processing query'), st.session_state.language)
                 st.error(error_msg)
-                st.session_state.messages.append({"role":"assistant","content":error_msg})
+                st.session_state.messages.append({"role": "assistant", "content": error_msg})
