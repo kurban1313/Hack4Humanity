@@ -9,10 +9,11 @@ import json
 
 st.set_page_config(page_title="INGRES AI Assistant", page_icon="💧", layout="wide")
 
-# OpenAI Client Setup
+import os
+
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="enter_your_apikey_here",    #get it from open router for free and just paste it here
+    api_key=st.secrets.get("OPENROUTER_API_KEY", os.getenv("OPENROUTER_API_KEY", "")),
 )
 
 # CSS - Complete UI Fix
@@ -644,3 +645,4 @@ if p := st.chat_input(gt('input', st.session_state.language)):
                 error_msg = tr(ai_result.get('message', 'Error processing query'), st.session_state.language)
                 st.error(error_msg)
                 st.session_state.messages.append({"role": "assistant", "content": error_msg})
+
