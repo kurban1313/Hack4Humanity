@@ -85,16 +85,12 @@ LRU Cache
  ┣ 📜 README.md             # Documentation
 
 ⚡ Installation
-1️⃣ Clone Repository
-git clone https://github.com/kurban1313/Hack4Humanity.git
+1️⃣ Clone Repository-git clone https://github.com/kurban1313/Hack4Humanity.git
+       then-cd Hack4Humanity
 
-cd Hack4Humanity
+2️⃣ Install Dependencies-pip install -r requirements.txt
 
-2️⃣ Install Dependencies
-pip install -r requirements.txt
-
-3️⃣ Run App
-streamlit run app.py
+3️⃣ Run App-streamlit run app.py
 
 📊 Data
 
