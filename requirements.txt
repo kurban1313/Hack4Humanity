@@ -1,5 +1,6 @@
 streamlit==1.37.0
 pandas==2.2.2
 fuzzywuzzy==0.18.0
-python-Levenshtein==0.25.1
+python-Levenshtein==0.21.1
 deep-translator==1.11.4
+openai==1.12.0
