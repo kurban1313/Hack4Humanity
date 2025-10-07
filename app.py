@@ -1,13 +1,11 @@
 import streamlit as st
 import pandas as pd
-from rapidfuzz import fuzz, process  # ✅ Fixed!
+from fuzzywuzzy import fuzz, process
 import re
 from deep_translator import GoogleTranslator
 from functools import lru_cache
 from openai import OpenAI
 import json
-import os
-
 
 st.set_page_config(page_title="INGRES AI Assistant", page_icon="💧", layout="wide")
 
@@ -647,5 +645,4 @@ if p := st.chat_input(gt('input', st.session_state.language)):
                 error_msg = tr(ai_result.get('message', 'Error processing query'), st.session_state.language)
                 st.error(error_msg)
                 st.session_state.messages.append({"role": "assistant", "content": error_msg})
-
 
