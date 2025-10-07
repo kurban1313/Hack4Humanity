@@ -1,164 +1,324 @@
-# Hack4Humanity
-💧 INGRES AI Assistant
+# 💧 INGRES AI Assistant
 
-A multilingual AI-powered virtual assistant built with Streamlit, designed to help users explore and interact with groundwater data across Indian districts.
-This tool supports natural language queries, fuzzy search, contextual memory, and comparisons across years/districts with a clean interactive UI.
+<div align="center">
 
-🚀 Features
-🔍 Natural Language Queries
+![INGRES AI](https://img.shields.io/badge/INGRES-AI%20Assistant-2d3561?style=for-the-badge)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.39-FF4B4B?style=for-the-badge&logo=streamlit)
+![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python)
+![DeepSeek](https://img.shields.io/badge/DeepSeek-AI-00A67E?style=for-the-badge)
 
-Ask in plain English or regional languages.
+**Smart AI Assistant for Groundwater Data Analysis**
 
-Queries like:
+[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Configuration](#-configuration) • [License](#-license)
 
-"Groundwater in Jalandhar 2023?"
+</div>
 
-"Compare Pune vs Mumbai 2022"
+---
 
-🌐 Multilingual Support
+## 📖 Overview
 
-Supports 12+ Indian languages (via deep-translator
-):
+INGRES AI Assistant is an intelligent chatbot powered by **DeepSeek AI** that helps analyze groundwater data across Indian districts. It features context-aware conversations, multi-language support (12 Indian languages), and advanced district/year comparison capabilities.
 
-English, Hindi, Tamil, Telugu, Kannada, Malayalam, Marathi, Gujarati, Bengali, Punjabi, Odia, Urdu.
+### ✨ Key Highlights
 
-📊 Groundwater Data Explorer
+- 🤖 **AI-Powered**: Uses DeepSeek Chat v3.1 for natural language understanding
+- 🌍 **Multi-Language**: Supports Hindi, Tamil, Telugu, Kannada, Malayalam, Marathi, Gujarati, Bengali, Punjabi, Odia, Urdu
+- 📊 **Smart Comparisons**: Compare multiple districts or track time series data
+- 🧠 **Context-Aware**: Remembers previous queries for seamless conversations
+- 📈 **Data Visualization**: Beautiful cards and comparison tables
+- ⚡ **Fast & Responsive**: Cached translations and optimized queries
 
-Fetches district-wise groundwater data for given years.
+## 🎯 Features
 
-Provides key metrics:
+### Core Capabilities
 
-🌊 Groundwater Level (m)
+✅ **Single District Query**: Get detailed data for any district and year  
+✅ **District Comparison**: Compare 2+ districts for the same year  
+✅ **Time Series Analysis**: Track changes across multiple years  
+✅ **Context Memory**: Follow-up questions without repeating context  
+✅ **Year Normalization**: Automatically handles "23" → "2023"  
+✅ **Fuzzy Matching**: Understands misspelled district names  
+✅ **Real-time Translation**: 12 Indian languages supported  
+✅ **Error Handling**: Graceful failures with helpful messages
 
-💧 Annual Recharge (BCM)
+## 🚀 Installation
 
-📉 Extraction (BCM)
+### Prerequisites
 
-📊 Category
+- Python 3.9 or higher
+- OpenRouter API key ([Get it here](https://openrouter.ai/keys))
 
-🔄 Comparisons
+### Quick Start
 
-Year-wise Comparison → Track trends over time for a single district.
+#### 1. Clone the Repository
 
-District-wise Comparison → Compare multiple districts in the same year.
+```bash
+git clone https://github.com/yourusername/ingres-ai-assistant.git
+cd ingres-ai-assistant
+```
 
-Insights with highlights of best/worst/average.
+#### 2. Create Virtual Environment
 
-📈 Visualizations
+```bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
 
-Chart rendering (demo chart for Jalandhar included).
+# macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
 
-🤖 AI Assistant Capabilities
+#### 3. Install Dependencies
 
-Contextual memory: remembers last district/year if missing in query.
+```bash
+pip install -r requirements.txt
+```
 
-Fuzzy matching: understands misspelled district names.
+#### 4. Set Up API Key
 
-Quick Actions: Buttons for fast queries (View data, Compare, Charts, Help).
+**Option A: Using secrets.toml (Recommended)**
 
-🛠️ Tech Stack
+```bash
+# Create .streamlit folder
+mkdir .streamlit
 
-Streamlit
- → UI & app framework.
+# Create secrets file
+# Copy secrets.toml.template to .streamlit/secrets.toml
+cp secrets.toml.template .streamlit/secrets.toml
 
-Pandas
- → Data handling.
+# Edit .streamlit/secrets.toml and add your API key:
+# OPENROUTER_API_KEY = "your-actual-key-here"
+```
 
-FuzzyWuzzy
- → Fuzzy district matching.
+**Option B: Using Environment Variable**
 
-Deep Translator
- → Language translation.
+```bash
+# Windows
+set OPENROUTER_API_KEY=your-api-key-here
 
-Regex
- → Year & entity extraction.
+# macOS/Linux
+export OPENROUTER_API_KEY=your-api-key-here
+```
 
-LRU Cache
- → Optimized translation & lookups.
+#### 5. Run the App
 
-📂 Repository Structure
-📦 ingres-ai-assistant
- ┣ 📜 app.py                # Main Streamlit app
- ┣ 📜 sample_data.csv       # Demo groundwater dataset
- ┣ 📜 jalandhar_chart.png   # Example visualization
- ┣ 📜 requirements.txt      # Python dependencies
- ┣ 📜 README.md             # Documentation
+```bash
+streamlit run app.py
+```
 
-⚡ Installation
-1️⃣ Clone Repository-git clone https://github.com/kurban1313/Hack4Humanity.git
-       then-cd Hack4Humanity
+Visit `http://localhost:8501` in your browser 🎉
 
-2️⃣ Install Dependencies-pip install -r requirements.txt
+## 📊 Data Format
 
-3️⃣ Run App-streamlit run app.py
+Your `sample_data.csv` should have these columns:
 
-📊 Data
+| Column | Type | Description |
+|--------|------|-------------|
+| `District` | string | District name (e.g., "Jalandhar") |
+| `Year` | int | Year (e.g., 2023) |
+| `Groundwater_Level_m` | float | Water level in meters |
+| `Recharge_BCM` | float | Recharge in BCM |
+| `Extraction_BCM` | float | Extraction in BCM |
+| `Category` | string | Safe/Semi-Critical/Critical/Over-Exploited |
 
-The demo uses sample_data.csv with columns:
+**Example:**
 
-District	Year	Groundwater_Level_m	Recharge_BCM	Extraction_BCM	Category
-Jalandhar	2023	23.5	12.4	8.9	Safe
+```csv
+District,Year,Groundwater_Level_m,Recharge_BCM,Extraction_BCM,Category
+Jalandhar,2023,10.9,2.1,2.1,Semi-Critical
+Pune,2023,7.2,2.8,3.3,Critical
+```
+
+## 💬 Usage Examples
+
+### Basic Queries
+
+```
+💬 "Show me Jalandhar 23"
+💬 "What's the groundwater level in Pune for 2022?"
+💬 "Give me data for Mumbai 2023"
+```
+
+### District Comparison
 
-👉 Replace this file with real groundwater datasets (e.g., from CGWB India reports).
+```
+💬 "Compare Pune and Mumbai for 2022"
+💬 "Show Delhi vs Bangalore for 23"
+💬 "Compare Jalandhar, Ludhiana, and Amritsar for 2023"
+```
 
-🌍 Multilingual Support
-Code	Language	Flag
-en	English	🇬🇧
-hi	हिन्दी	🇮🇳
-ta	தமிழ்	🇮🇳
-te	తెలుగు	🇮🇳
-kn	ಕನ್ನಡ	🇮🇳
-ml	മലയാളം	🇮🇳
-mr	मराठी	🇮🇳
-gu	ગુજરાતી	🇮🇳
-bn	বাংলা	🇮🇳
-pa	ਪੰਜਾਬੀ	🇮🇳
-or	ଓଡ଼ିଆ	🇮🇳
-ur	اردو	🇮🇳
-📌 Usage Examples
+### Time Series Analysis
 
-Single Query
+```
+💬 "Show Delhi 2020, 2021, 2022, 2023"
+💬 "Compare Jalandhar across 20, 21, 22"
+💬 "Time series for Pune from 2020 to 2023"
+```
 
-Input: "Groundwater in Pune 2022"
+### Context-Aware Queries
 
-Output: Metrics card with groundwater level, recharge, extraction.
+```
+User: "Show me Jalandhar 2023"
+AI: [Shows data]
 
-Comparison Across Years
+User: "What about 2022?"
+AI: [Shows Jalandhar 2022 automatically]
 
-Input: "Compare Jalandhar 2020 and 2023"
+User: "Compare with Pune"
+AI: [Compares Pune and Jalandhar for 2022]
+```
 
-Output: Year-wise comparison cards + trend insights.
+## 🌍 Supported Languages
 
-Comparison Across Districts
+| Language | Code | Native Name |
+|----------|------|-------------|
+| English | `en` | English |
+| Hindi | `hi` | हिन्दी |
+| Tamil | `ta` | தமிழ் |
+| Telugu | `te` | తెలుగు |
+| Kannada | `kn` | ಕನ್ನಡ |
+| Malayalam | `ml` | മലയാളം |
+| Marathi | `mr` | मराठी |
+| Gujarati | `gu` | ગુજરાતી |
+| Bengali | `bn` | বাংলা |
+| Punjabi | `pa` | ਪੰਜਾਬੀ |
+| Odia | `or` | ଓଡ଼ିଆ |
+| Urdu | `ur` | اردو |
 
-Input: "Compare Pune vs Mumbai 2022"
+## ⚙️ Configuration
 
-Output: District-wise comparison with highest/lowest/average levels.
+### Environment Variables
 
-🧩 Future Enhancements
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `OPENROUTER_API_KEY` | OpenRouter API key | ✅ Yes |
 
-✅ Support for interactive charts (line/bar/heatmaps).
+### Customization Options
 
-✅ Integration with real-time government datasets.
+**Change AI Model:**
+Edit line ~390 in `app.py`:
+```python
+model="deepseek/deepseek-chat-v3.1:free"
+# Change to any OpenRouter model
+```
 
-✅ Export results to PDF/Excel.
+**Modify Colors:**
+Search for `#2d3561` in CSS section to change theme colors.
 
-✅ Voice-based query support.
+**Add More Languages:**
+Update the `LANGS` dictionary in `app.py`.
 
-🙏 Acknowledgments
+## 🛠️ Tech Stack
 
-This project leverages several open-source libraries:
+- **Frontend**: Streamlit 1.39
+- **AI Model**: DeepSeek Chat v3.1 (via OpenRouter)
+- **Translation**: Google Translate (deep-translator)
+- **Data Processing**: Pandas
+- **Fuzzy Matching**: FuzzyWuzzy
+- **API Client**: OpenAI Python SDK
 
-Streamlit
+## 📁 Project Structure
 
-Pandas
+```
+ingres-ai-assistant/
+├── app.py                      # Main application (725 lines, fully fixed)
+├── sample_data.csv             # Sample groundwater data
+├── requirements.txt            # Python dependencies
+├── README.md                   # This file
+├── LICENSE                     # MIT License
+├── .gitignore                  # Git ignore rules
+├── secrets.toml.template       # API key template
+└── .streamlit/
+    └── secrets.toml           # API keys (create this, not in git)
+```
 
-FuzzyWuzzy
+## 🐛 Troubleshooting
 
-Deep Translator
+### Common Issues
 
-And inspired by groundwater datasets from Central Ground Water Board (CGWB), India.
+**Issue: "OPENROUTER_API_KEY not found"**  
+✅ Solution: Create `.streamlit/secrets.toml` or set environment variable
 
-📜 License
+**Issue: "sample_data.csv not found"**  
+✅ Solution: Ensure CSV is in root directory with correct column names
 
-This project is licensed under the MIT License – feel free to use, modify, and share!
+**Issue: "Translation error"**  
+✅ Solution: Check internet connection (Google Translate requires it)
+
+**Issue: Chat not updating after sending message**  
+✅ Solution: This is fixed! The new code includes `st.rerun()` at line 700
+
+**Issue: "ModuleNotFoundError"**  
+✅ Solution: Run `pip install -r requirements.txt`
+
+## 🚀 Deployment
+
+### Deploy to Streamlit Cloud
+
+1. Push code to GitHub
+2. Go to [share.streamlit.io](https://share.streamlit.io)
+3. Click "New app"
+4. Select your repository
+5. Add secret: `OPENROUTER_API_KEY = "your-key"`
+6. Click "Deploy"
+
+### Deploy to Other Platforms
+
+- **Heroku**: Add `Procfile` with `web: streamlit run app.py`
+- **Railway**: Works out of the box
+- **Render**: Add build command `pip install -r requirements.txt`
+
+## 🤝 Contributing
+
+Contributions are welcome! Please:
+
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Streamlit](https://streamlit.io/) - Amazing web framework
+- [OpenRouter](https://openrouter.ai/) - AI model access
+- [DeepSeek](https://www.deepseek.com/) - Powerful AI model
+- [deep-translator](https://github.com/nidhaloff/deep-translator) - Translation library
+
+## 📧 Support
+
+- **Issues**: [GitHub Issues](https://github.com/yourusername/ingres-ai-assistant/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yourusername/ingres-ai-assistant/discussions)
+- **Email**: your-email@example.com
+
+## 🎯 Roadmap
+
+- [ ] Add data visualization charts
+- [ ] Export data to PDF/Excel
+- [ ] Real-time data integration
+- [ ] User authentication
+- [ ] Historical trend predictions
+- [ ] Mobile app version
+
+## 📊 Stats
+
+![GitHub stars](https://img.shields.io/github/stars/yourusername/ingres-ai-assistant?style=social)
+![GitHub forks](https://img.shields.io/github/forks/yourusername/ingres-ai-assistant?style=social)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+
+---
+
+<div align="center">
+
+Made with ❤️ for Groundwater Management in India
+
+⭐ Star this repo if you find it helpful!
+
+[Report Bug](https://github.com/yourusername/ingres-ai-assistant/issues) • [Request Feature](https://github.com/yourusername/ingres-ai-assistant/issues)
+
+</div>
