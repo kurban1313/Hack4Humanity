@@ -53,8 +53,8 @@ INGRES AI Assistant is an intelligent chatbot powered by **DeepSeek AI** that he
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/ingres-ai-assistant.git
-cd ingres-ai-assistant
+git clone https://github.com/kurban1313/Hack4Humanity.git 
+cd Hack4Humanity
 ```
 
 #### 2. Create Virtual Environment
