@@ -3,8 +3,8 @@
 <div align="center">
 
 ![INGRES AI](https://img.shields.io/badge/INGRES-AI%20Assistant-2d3561?style=for-the-badge)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.39-FF4B4B?style=for-the-badge&logo=streamlit)
-![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.39-FF4B4B?style=for-the-badge\&logo=streamlit)
+![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge\&logo=python)
 ![DeepSeek](https://img.shields.io/badge/DeepSeek-AI-00A67E?style=for-the-badge)
 
 **Smart AI Assistant for Groundwater Data Analysis**
@@ -12,6 +12,8 @@
 [Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Configuration](#-configuration) • [License](#-license)
 
 </div>
+
+[Live preview](https://hack4humanity.streamlit.app)
 
 ---
 
@@ -21,39 +23,39 @@ INGRES AI Assistant is an intelligent chatbot powered by **DeepSeek AI** that he
 
 ### ✨ Key Highlights
 
-- 🤖 **AI-Powered**: Uses DeepSeek Chat v3.1 for natural language understanding
-- 🌍 **Multi-Language**: Supports Hindi, Tamil, Telugu, Kannada, Malayalam, Marathi, Gujarati, Bengali, Punjabi, Odia, Urdu
-- 📊 **Smart Comparisons**: Compare multiple districts or track time series data
-- 🧠 **Context-Aware**: Remembers previous queries for seamless conversations
-- 📈 **Data Visualization**: Beautiful cards and comparison tables
-- ⚡ **Fast & Responsive**: Cached translations and optimized queries
+* 🤖 **AI-Powered**: Uses DeepSeek Chat v3.1 for natural language understanding
+* 🌍 **Multi-Language**: Supports Hindi, Tamil, Telugu, Kannada, Malayalam, Marathi, Gujarati, Bengali, Punjabi, Odia, Urdu
+* 📊 **Smart Comparisons**: Compare multiple districts or track time series data
+* 🧠 **Context-Aware**: Remembers previous queries for seamless conversations
+* 📈 **Data Visualization**: Beautiful cards and comparison tables
+* ⚡ **Fast & Responsive**: Cached translations and optimized queries
 
 ## 🎯 Features
 
 ### Core Capabilities
 
-✅ **Single District Query**: Get detailed data for any district and year  
-✅ **District Comparison**: Compare 2+ districts for the same year  
-✅ **Time Series Analysis**: Track changes across multiple years  
-✅ **Context Memory**: Follow-up questions without repeating context  
-✅ **Year Normalization**: Automatically handles "23" → "2023"  
-✅ **Fuzzy Matching**: Understands misspelled district names  
-✅ **Real-time Translation**: 12 Indian languages supported  
+✅ **Single District Query**: Get detailed data for any district and year
+✅ **District Comparison**: Compare 2+ districts for the same year
+✅ **Time Series Analysis**: Track changes across multiple years
+✅ **Context Memory**: Follow-up questions without repeating context
+✅ **Year Normalization**: Automatically handles "23" → "2023"
+✅ **Fuzzy Matching**: Understands misspelled district names
+✅ **Real-time Translation**: 12 Indian languages supported
 ✅ **Error Handling**: Graceful failures with helpful messages
 
 ## 🚀 Installation
 
 ### Prerequisites
 
-- Python 3.9 or higher
-- OpenRouter API key ([Get it here](https://openrouter.ai/keys))
+* Python 3.9 or higher
+* OpenRouter API key ([Get it here](https://openrouter.ai/keys))
 
 ### Quick Start
 
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/kurban1313/Hack4Humanity.git 
+git clone https://github.com/kurban1313/Hack4Humanity.git
 cd Hack4Humanity
 ```
 
@@ -113,14 +115,14 @@ Visit `http://localhost:8501` in your browser 🎉
 
 Your `sample_data.csv` should have these columns:
 
-| Column | Type | Description |
-|--------|------|-------------|
-| `District` | string | District name (e.g., "Jalandhar") |
-| `Year` | int | Year (e.g., 2023) |
-| `Groundwater_Level_m` | float | Water level in meters |
-| `Recharge_BCM` | float | Recharge in BCM |
-| `Extraction_BCM` | float | Extraction in BCM |
-| `Category` | string | Safe/Semi-Critical/Critical/Over-Exploited |
+| Column                | Type   | Description                                |
+| --------------------- | ------ | ------------------------------------------ |
+| `District`            | string | District name (e.g., "Jalandhar")          |
+| `Year`                | int    | Year (e.g., 2023)                          |
+| `Groundwater_Level_m` | float  | Water level in meters                      |
+| `Recharge_BCM`        | float  | Recharge in BCM                            |
+| `Extraction_BCM`      | float  | Extraction in BCM                          |
+| `Category`            | string | Safe/Semi-Critical/Critical/Over-Exploited |
 
 **Example:**
 
@@ -171,33 +173,34 @@ AI: [Compares Pune and Jalandhar for 2022]
 
 ## 🌍 Supported Languages
 
-| Language | Code | Native Name |
-|----------|------|-------------|
-| English | `en` | English |
-| Hindi | `hi` | हिन्दी |
-| Tamil | `ta` | தமிழ் |
-| Telugu | `te` | తెలుగు |
-| Kannada | `kn` | ಕನ್ನಡ |
-| Malayalam | `ml` | മലയാളം |
-| Marathi | `mr` | मराठी |
-| Gujarati | `gu` | ગુજરાતી |
-| Bengali | `bn` | বাংলা |
-| Punjabi | `pa` | ਪੰਜਾਬੀ |
-| Odia | `or` | ଓଡ଼ିଆ |
-| Urdu | `ur` | اردو |
+| Language  | Code | Native Name |
+| --------- | ---- | ----------- |
+| English   | `en` | English     |
+| Hindi     | `hi` | हिन्दी      |
+| Tamil     | `ta` | தமிழ்       |
+| Telugu    | `te` | తెలుగు      |
+| Kannada   | `kn` | ಕನ್ನಡ       |
+| Malayalam | `ml` | മലയാളം      |
+| Marathi   | `mr` | मराठी       |
+| Gujarati  | `gu` | ગુજરાતી     |
+| Bengali   | `bn` | বাংলা       |
+| Punjabi   | `pa` | ਪੰਜਾਬੀ      |
+| Odia      | `or` | ଓଡ଼ିଆ       |
+| Urdu      | `ur` | اردو        |
 
 ## ⚙️ Configuration
 
 ### Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `OPENROUTER_API_KEY` | OpenRouter API key | ✅ Yes |
+| Variable             | Description        | Required |
+| -------------------- | ------------------ | -------- |
+| `OPENROUTER_API_KEY` | OpenRouter API key | ✅ Yes    |
 
 ### Customization Options
 
 **Change AI Model:**
 Edit line ~390 in `app.py`:
+
 ```python
 model="deepseek/deepseek-chat-v3.1:free"
 # Change to any OpenRouter model
@@ -211,12 +214,12 @@ Update the `LANGS` dictionary in `app.py`.
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Streamlit 1.39
-- **AI Model**: DeepSeek Chat v3.1 (via OpenRouter)
-- **Translation**: Google Translate (deep-translator)
-- **Data Processing**: Pandas
-- **Fuzzy Matching**: FuzzyWuzzy
-- **API Client**: OpenAI Python SDK
+* **Frontend**: Streamlit 1.39
+* **AI Model**: DeepSeek Chat v3.1 (via OpenRouter)
+* **Translation**: Google Translate (deep-translator)
+* **Data Processing**: Pandas
+* **Fuzzy Matching**: FuzzyWuzzy
+* **API Client**: OpenAI Python SDK
 
 ## 📁 Project Structure
 
@@ -237,19 +240,19 @@ ingres-ai-assistant/
 
 ### Common Issues
 
-**Issue: "OPENROUTER_API_KEY not found"**  
+**Issue: "OPENROUTER_API_KEY not found"**
 ✅ Solution: Create `.streamlit/secrets.toml` or set environment variable
 
-**Issue: "sample_data.csv not found"**  
+**Issue: "sample_data.csv not found"**
 ✅ Solution: Ensure CSV is in root directory with correct column names
 
-**Issue: "Translation error"**  
+**Issue: "Translation error"**
 ✅ Solution: Check internet connection (Google Translate requires it)
 
-**Issue: Chat not updating after sending message**  
+**Issue: Chat not updating after sending message**
 ✅ Solution: This is fixed! The new code includes `st.rerun()` at line 700
 
-**Issue: "ModuleNotFoundError"**  
+**Issue: "ModuleNotFoundError"**
 ✅ Solution: Run `pip install -r requirements.txt`
 
 ## 🚀 Deployment
@@ -265,9 +268,9 @@ ingres-ai-assistant/
 
 ### Deploy to Other Platforms
 
-- **Heroku**: Add `Procfile` with `web: streamlit run app.py`
-- **Railway**: Works out of the box
-- **Render**: Add build command `pip install -r requirements.txt`
+* **Heroku**: Add `Procfile` with `web: streamlit run app.py`
+* **Railway**: Works out of the box
+* **Render**: Add build command `pip install -r requirements.txt`
 
 ## 🤝 Contributing
 
@@ -285,25 +288,25 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- [Streamlit](https://streamlit.io/) - Amazing web framework
-- [OpenRouter](https://openrouter.ai/) - AI model access
-- [DeepSeek](https://www.deepseek.com/) - Powerful AI model
-- [deep-translator](https://github.com/nidhaloff/deep-translator) - Translation library
+* [Streamlit](https://streamlit.io/) - Amazing web framework
+* [OpenRouter](https://openrouter.ai/) - AI model access
+* [DeepSeek](https://www.deepseek.com/) - Powerful AI model
+* [deep-translator](https://github.com/nidhaloff/deep-translator) - Translation library
 
 ## 📧 Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/ingres-ai-assistant/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/ingres-ai-assistant/discussions)
-- **Email**: your-email@example.com
+* **Issues**: [GitHub Issues](https://github.com/yourusername/ingres-ai-assistant/issues)
+* **Discussions**: [GitHub Discussions](https://github.com/yourusername/ingres-ai-assistant/discussions)
+* **Email**: [your-email@example.com](mailto:your-email@example.com)
 
 ## 🎯 Roadmap
 
-- [ ] Add data visualization charts
-- [ ] Export data to PDF/Excel
-- [ ] Real-time data integration
-- [ ] User authentication
-- [ ] Historical trend predictions
-- [ ] Mobile app version
+* [ ] Add data visualization charts
+* [ ] Export data to PDF/Excel
+* [ ] Real-time data integration
+* [ ] User authentication
+* [ ] Historical trend predictions
+* [ ] Mobile app version
 
 ## 📊 Stats
 
@@ -319,6 +322,6 @@ Made with ❤️ for Groundwater Management in India
 
 ⭐ Star this repo if you find it helpful!
 
-[Report Bug](https://github.com/yourusername/ingres-ai-assistant/issues) • [Request Feature](https://github.com/yourusername/ingres-ai-assistant/issues)
+[Report Bug](https://https://github.com/kurban1313/Hack4Humanity/issues) • [Request Feature](https://https://github.com/kurban1313/Hack4Humanity/issues)
 
 </div>
