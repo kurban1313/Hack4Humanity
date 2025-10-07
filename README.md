@@ -310,8 +310,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📊 Stats
 
-![GitHub stars](https://img.shields.io/github/stars/yourusername/ingres-ai-assistant?style=social)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/ingres-ai-assistant?style=social)
+![GitHub stars](https://img.shields.io/github/stars/kurban1313/Hack4Humanity?style=social)
+![GitHub forks](https://img.shields.io/github/forks/kurban1313/Hack4Humanity?style=social)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ---
