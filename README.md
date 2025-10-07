@@ -297,7 +297,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 * **Issues**: [GitHub Issues](https://github.com/yourusername/ingres-ai-assistant/issues)
 * **Discussions**: [GitHub Discussions](https://github.com/yourusername/ingres-ai-assistant/discussions)
-* **Email**: [your-email@example.com](mailto:your-email@example.com)
+* **Email**: [your-email@example.com](mailto:kurban.s1313@gmail.com)
 
 ## 🎯 Roadmap
 
