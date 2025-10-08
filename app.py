@@ -378,7 +378,7 @@ User language: {LANGS[language]['name']}"""
         }]
 
         response = client.chat.completions.create(
-            model="deepseek/deepseek-chat-v3.1:free",
+            model="z-ai/glm-4.5-air:free",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_query}
@@ -723,3 +723,4 @@ if p := st.chat_input(gt('input', st.session_state.language)):
 
     # CRITICAL FIX: Rerun after processing
     st.rerun()
+
